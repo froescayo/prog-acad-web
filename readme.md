@@ -7,7 +7,7 @@ IMAGEM AQUI
   <img src="Time.png" width="700">
 </p>
 
-- [Iury Gomes de Oliveira](https://github.com/iurygdeoliveira) (Documentação, Requisitos e Back-end)
+- [Iury Gomes de Oliveira](https://github.com/iurygdeoliveira) (Documentação e Requisitos)
 - [Lucas Ferreira](https://github.com/KasFerreira) (Função)
 - [Andrei Macedo](https://github.com/asmcdo) (Função)
 - [Breno Barreto de Souza Santos](https://github.com/brenobss) (Função)
