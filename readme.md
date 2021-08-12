@@ -7,13 +7,13 @@ IMAGEM AQUI
   <img src="Time.png" width="700">
 </p>
 
-- [Iury Gomes de Oliveira](https://github.com/iurygdeoliveira) (Documentação e Requisitos)
+- [Iury Gomes de Oliveira](https://github.com/iurygdeoliveira) (Gestão)
 - [Lucas Ferreira](https://github.com/KasFerreira) (Função)
 - [Andrei Macedo](https://github.com/asmcdo) (Função)
-- [Breno Barreto de Souza Santos](https://github.com/brenobss) (Função)
-- [Emanuel Vieira](https://github.com/emanuelvs) (Função)
-- [Cayo Froes](https://github.com/froescayo) (Back-End)
-- [integrante](https://github.com/froescayo) (Back-End)
+- [Breno Barreto de Souza Santos](https://github.com/brenobss) (Front-End)
+- [Emanuel Vieira](https://github.com/emanuelvs) (Design)
+- [Cayo Froes](https://github.com/froescayo) (Back-End e BD)
+- [Arlete Reis](https://github.com/arllette) (Requisitos e Documentação)
 
 # Objetivo
 
