@@ -4,7 +4,7 @@ Repositório contendo o projeto desenvolvido para a disciplina de TÓPICOS EM SI
 # Quem somos nós
 IMAGEM AQUI
 <p align="center">
-  <img src="Time.png" width="700">
+  <img src="Equipe.jpg" width="700">
 </p>
 
 - [Iury Gomes de Oliveira](https://github.com/iurygdeoliveira) (Gestão)
