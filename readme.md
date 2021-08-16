@@ -21,6 +21,10 @@ Repositório contendo o projeto desenvolvido para a disciplina de TÓPICOS EM SI
 # Proposta de Solução 
 
 # Tecnologias Utilizadas
+## Diagramas UML
+- Caso de Uso
+- Atividade
+- Sequencia
 ## Front-End
 - HTML5
 - CSS3
@@ -29,8 +33,5 @@ Repositório contendo o projeto desenvolvido para a disciplina de TÓPICOS EM SI
 ## Back-End
 - Docker
 - TypeScript
-
-## Diagramas UML
-- Caso de Uso
-- Atividade
-- Sequencia
+## Deploy
+- Em análise
