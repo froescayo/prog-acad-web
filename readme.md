@@ -21,17 +21,19 @@ Repositório contendo o projeto desenvolvido para a disciplina de TÓPICOS EM SI
 # Proposta de Solução 
 
 # Tecnologias Utilizadas
-## Diagramas UML
+## [Diagramas UML]()
 - Caso de Uso
 - Atividade
 - Sequencia
-## Front-End
+## [Front-End](https://github.com/froescayo/prog-acad-web)
 - HTML5
 - CSS3
 - JS
 - ReactJS
-## Back-End
+## [Back-End](https://github.com/froescayo/prog-acad-api)
 - Docker
 - TypeScript
 ## Deploy
+- Em análise
+## Cenários de Teste
 - Em análise
