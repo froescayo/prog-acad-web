@@ -1,4 +1,5 @@
 # Sistema de Progressões Acadêmicas da UFBA
+
 Repositório contendo o projeto desenvolvido para a disciplina de TÓPICOS EM SISTEMAS DE INFORMAÇÃO E WEB I, do PGCOMP (Programa de Mestrado em Ciência da Computação da UFBA) sob orientação do Prof. Dr. Fred Durão, no ano de 2021
 
 # Quem somos nós
@@ -19,6 +20,7 @@ Repositório contendo o projeto desenvolvido para a disciplina de TÓPICOS EM SI
 
 O projeto-piloto tem por objetivo desenvolver um sistema de cadastro da progressão e promoção do docente na carreira do Ensino Superior da Universidade Federal da Bahia.
 
+# Arquitetura do Sistema
 # [Diagramas UML](https://github.com/froescayo/prog-acad-web/tree/master/Diagramas%20UML)
 - Caso de Uso
 - Classes
@@ -27,7 +29,7 @@ O projeto-piloto tem por objetivo desenvolver um sistema de cadastro da progress
 # Regras de Negócio
 
 [RN01] O requerente acessa o sistema através de convite para solicitar sua progressão ou promoção.
-[RN02]  O sistema deve calcular a pontuação do docente a partir de suas atividades realizadas em um interstício de 2 anos/4 semestres.
+[RN02] O sistema deve calcular a pontuação do docente a partir de suas atividades realizadas em um interstício de 2 anos/4 semestres.
 [RN03] O sistema deve “Incluir” comprovante das atividades que serão anexadas.
 [RN04] O sistema deve informar o “Nome do Usuário” logado automaticamente.
 [RN05] O sistema deve permitir que o perfil seja associado a um ou mais usuários. 
@@ -66,6 +68,8 @@ O projeto-piloto tem por objetivo desenvolver um sistema de cadastro da progress
 - Docker
 - TypeScript
 # Deploy
-- Em análise
-# Cenários de Teste
-- Em análise
+- ## Como Rodar o front-end
+- ## Como Rodar o back-end
+# Projeto de Implantação
+- Em construção
+  
