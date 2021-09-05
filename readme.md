@@ -69,6 +69,18 @@ O projeto-piloto tem por objetivo desenvolver um sistema de cadastro da progress
 - TypeScript
 # Deploy
 - ## Como Rodar o front-end
+- Dependências
+  - nodejs
+  - npm
+  - yarn
+
+- Digite o comando no terminal > git clone https://github.com/froescayo/prog-acad-web.git
+
+- Após isso entre na pasta do projeto ainda no terminal com > cd prog-acad-web
+
+- Em seguida digite > npm install
+
+- Por fim > npm start
 - ## Como Rodar o back-end
 # Projeto de Implantação
 - Em construção
