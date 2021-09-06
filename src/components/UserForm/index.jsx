@@ -38,7 +38,7 @@ export default function UserForm({handleSubmit}) {
 		<div className="signup-container">
 			<div className="signup">
 				<form className="root" noValidate autoComplete="off" onSubmit={handleSubmit}>
-					<Typography variant="h4" style={{marginBottom: '12px'}}>Resgistar</Typography>
+					<Typography variant="h4" style={{marginBottom: '12px'}}>Cadastro</Typography>
 					<FormControl variant="outlined" fullWidth size="small" style={{marginBottom: '8px'}}>
 						<InputLabel id="demo-simple-select-outlined-label">Formação</InputLabel>
 						<Select
