@@ -1,7 +1,8 @@
 import { makeStyles } from '@material-ui/core/styles';
-import { TextField, Typography, Button } from '@material-ui/core';
-import { signIn } from '../store/reducers/auth';
-import LoginForm from './LoginForm';
+import { signIn } from "../../store/reducers/auth"
+import LoginForm from '../../components/LoginForm';
+import { Route, Switch } from 'react-router-dom';
+import UserForm from '../../components/UserForm';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -36,7 +37,6 @@ const useStyles = makeStyles((theme) => ({
 
 function Auth() {
 
-    const classes = useStyles();
 
     const handleSubmit =  (event) => {
         event.preventDefault();
@@ -58,7 +58,8 @@ function Auth() {
                     <p className="subtitle">Sistema de progressão e promoção de carreira acadêmica</p>
                 </div>
             </div>
-            <LoginForm handleSubmit={handleSubmit}/>
+            <Route path="/login" component={() => <LoginForm handleSubmit={handleSubmit}/>}/>
+            <Route path="/cadastro" component={() => <UserForm handleSubmit={handleSubmit}/>}/>
         </div>
     )
 }
