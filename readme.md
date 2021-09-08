@@ -21,6 +21,8 @@ Repositório contendo o projeto desenvolvido para a disciplina de TÓPICOS EM SI
 O projeto-piloto tem por objetivo desenvolver um sistema de cadastro da progressão e promoção do docente na carreira do Ensino Superior da Universidade Federal da Bahia.
 
 # Arquitetura do Sistema
+
+Link: https://whimsical.com/arquitetura-da-aplicacao-72ThrruL54ybvGVZX3mMfc
 # [Diagramas UML](https://github.com/froescayo/prog-acad-web/tree/master/Diagramas%20UML)
 - Caso de Uso
 - Classes
