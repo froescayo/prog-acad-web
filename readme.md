@@ -56,10 +56,10 @@ Link: https://whimsical.com/arquitetura-da-aplicacao-72ThrruL54ybvGVZX3mMfc
   - RNF03: O sistema deve permitir o acesso de diferentes usuários simultâneamente, mantento o tempo de resposta específico
 - Usabilidade:
   -  RNF04: O sistema deve permitir facilidade de uso.
-  -  RNF04: O sistema deve permitir navegabilidade fácil, contendo poucas páginas
+  -  RNF05: O sistema deve permitir navegabilidade fácil, contendo poucas páginas
 - Segurança
-  - RNF05: O sistema disponibiliza o acesso as ações das telas a partir da verificação do perfil do usuário 
-  - RNF06: O sistema registra o log das operações, inclusão e edição realizadas pelos usuários. A tabela armazena a data/hora,usuário 
+  - RNF06: O sistema disponibiliza o acesso as ações das telas a partir da verificação do perfil do usuário 
+  - RNF07: O sistema registra o log das operações, inclusão e edição realizadas pelos usuários. A tabela armazena a data/hora,usuário 
 # Tecnologias Utilizadas
 ## [Front-End](https://github.com/froescayo/prog-acad-web)
 - HTML5
