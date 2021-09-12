@@ -20,9 +20,14 @@ Repositório contendo o projeto desenvolvido para a disciplina de TÓPICOS EM SI
 
 O projeto-piloto tem por objetivo desenvolver um sistema de cadastro da progressão e promoção do docente na carreira do Ensino Superior da Universidade Federal da Bahia.
 
+# Demo
+
+https://prog-acad.herokuapp.com/
+
 # Arquitetura do Sistema
 
 Link: https://whimsical.com/arquitetura-da-aplicacao-72ThrruL54ybvGVZX3mMfc
+
 # [Diagramas UML](https://github.com/froescayo/prog-acad-web/tree/master/Diagramas%20UML)
 - Caso de Uso
 - Classes
@@ -67,11 +72,48 @@ Link: https://whimsical.com/arquitetura-da-aplicacao-72ThrruL54ybvGVZX3mMfc
 - JS
 - ReactJS
 ## [Back-End](https://github.com/froescayo/prog-acad-api)
-- Docker
-- TypeScript
+
+- NodeJs (Runtime Javascript em Back-End)
+- Typescript (Linguagem de Programação )
+- Postgres (Banco de Dados)
+- Knex (Query Builder)
+- Docker (Infraestrutura)
 # Deploy
 - ## Como Rodar o front-end
 - ## Como Rodar o back-end
+  - Acessar [How To](https://github.com/froescayo/prog-acad-api)
 # Projeto de Implantação
-- Em construção
+- Sistema Operacional: 
+  - O sistema é independente de SO, pois está sendo implatado sob a virtualização oferecida pelos containers do docker. Deste modo, no que se refere a sistema operacional, é exigido que host onde o sistema será instalado, possua ambiente docker instalado.
+- Requisitos mínimos de memória e processamento:
+  - Nosso sistema está rodando no ambiente grátis da heroku, de acordo com as especificações do site, o heroku usa uma unidade máquina virtual chamada Dyno, com _4 cores_ e até  _512MB de RAM_ sem swap file e sem suporte a _persistência de arquivos_ 
+- Softwares e versões das tecnologias macro
+  - Front-End:
+    - ReactJS (Versão 17.0.2)
+    - HTMLS 5
+    - CSS 3
+    - Docker (Engine 20)
+  - Back-End:
+    - NodeJS (Versão 14.17.6)
+    - Typescript (Versão 4.4)
+    - Knex (0.95.11)
+    - Docker (Engine 20)
+- Versão do Banco de Dados
+  - PostgreSQL (Versão estável 13.4)
+  - Docker (Engine 20)
+- Cloud a ser utilizado
+  - Heroku (https://www.heroku.com/)
+- Descrição de importação ou inicialização de dados, se aplicável
+  - O processo de importação ou inicialização de dados será facilitado pela estratégia _Infrastructure as code_. Um arquivo docker-compose será criado, descrevendo toda infraesturura necessária para ser instalada e inicializada de forma automática pelo docker.
+- Endereço de Acesso (URL e Porta)
+  - url: https://prog-acad.herokuapp.com/
+  - porta: 80 ou 443 
+  - O sistema está hospedado no ambiente grátis da heroku, e segue as
+  - configurações defaul deste ambiente para hospedagem grátis
+- Políticas de permissões:
+  - O sistema possuirá basicamente dois atores, o professor requerente, e professor avaliador. 
+    - Professor requerente, será permitido:
+      - Adicionar, editar, visualizar e excluir itens do seu processo de progressão
+    - Professor avaliador, será permitido:
+      - Visualizar e avaliar o processo de progressão 
   
