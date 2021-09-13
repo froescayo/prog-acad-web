@@ -86,7 +86,7 @@ Link: https://whimsical.com/arquitetura-da-aplicacao-72ThrruL54ybvGVZX3mMfc
 - Sistema Operacional: 
   - O sistema é independente de SO, pois está sendo implatado sob a virtualização oferecida pelos containers do docker. Deste modo, no que se refere a sistema operacional, é exigido que host onde o sistema será instalado, possua ambiente docker instalado.
 - Requisitos mínimos de memória e processamento:
-  - Nosso sistema está rodando no ambiente grátis da heroku, de acordo com as especificações do site, o heroku usa uma unidade máquina virtual chamada Dyno, com _4 cores_ e até  _512MB de RAM_ sem swap file e sem suporte a _persistência de arquivos_ 
+  - Nosso sistema está rodando no ambiente grátis da heroku, de acordo com as especificações do site, o heroku usa uma unidade máquina virtual chamada Dyno, com  _1 VCPU de 4 cores_ e até  _512MB de RAM_ sem swap file e sem suporte a _persistência de arquivos_ 
 - Softwares e versões das tecnologias macro
   - Front-End:
     - ReactJS (Versão 17.0.2)
