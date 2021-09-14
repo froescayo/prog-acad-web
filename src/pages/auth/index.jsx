@@ -1,22 +1,37 @@
-import { signIn } from "../../store/reducers/auth"
+import { signIn, signUp, fakeSignIn } from "../../store/reducers/auth"
 import LoginForm from '../../components/LoginForm';
-import { Route } from 'react-router-dom';
+import { Route, useHistory } from 'react-router-dom';
 import UserForm from '../../components/UserForm';
+import { useContext } from "react";
+import { GlobalStateContext } from "../../store";
 
+import './style.css';
 
 function Auth() {
 
+    let history = useHistory();
+    const [state, dispatch] = useContext(GlobalStateContext);
 
-    const handleSubmit = (event) => {
+    const handleSignInSubmit = (event) => {
         event.preventDefault();
         console.log({
             email: event.target.email.value,
             password: event.target.password.value,
         })
-        signIn({
+
+        fakeSignIn({
             email: event.target.email.value,
             password: event.target.password.value,
+        }, dispatch).then(r => {
+            history.push("/");
         })
+    }
+
+    const handleSignupSubmit = (event) => {
+        event.preventDefault();
+        signUp({
+
+        }, dispatch);
     }
 
     return (
@@ -27,8 +42,8 @@ function Auth() {
                     <p className="subtitle">Sistema de progressão e promoção de carreira acadêmica</p>
                 </div>
             </div>
-            <Route path="/login" component={() => <LoginForm handleSubmit={handleSubmit} />} />
-            <Route path="/cadastro" component={() => <UserForm handleSubmit={handleSubmit} />} />
+            <Route path="/login" component={() => <LoginForm handleSubmit={handleSignInSubmit} />} />
+            <Route path="/cadastro" component={() => <UserForm handleSubmit={handleSignupSubmit} />} />
         </div>
     )
 }

@@ -1,10 +1,12 @@
 import React from 'react';
-import ButtonAppBar from './ButtonAppBar';
+import ProgressionList from '../../components/ProgressionList';
 
 const Dashboard = () => {
 
     return (
-        <ButtonAppBar />
+        <div>
+            <ProgressionList/>
+        </div>
     );
 }
 

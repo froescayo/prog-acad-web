@@ -1,13 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
+import { GlobalStateContext } from "../../store";
 import { Redirect, Route } from "react-router-dom"
 
 function PrivateRoute({ children, ...rest }) {
-	let auth = { authenticated: false };
+	const [state, dispatch] = useContext(GlobalStateContext);
 	return (
 		<Route
 			{...rest}
 			render={({ location }) =>
-				auth.authenticated ? (
+				state.auth.user ? (
 					children
 				) : (
 					<Redirect

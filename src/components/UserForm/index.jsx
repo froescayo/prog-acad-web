@@ -1,38 +1,37 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import { TextField, Button, Typography, FormControl, Select, InputLabel, MenuItem } from '@material-ui/core';
 
 import './style.css';
 import { Link } from 'react-router-dom';
-/* 
-				table.date("birthdate").notNullable();
-		table.integer("workload").notNullable();
-		table.text("academicDegreeId").notNullable();
-		table.text("careerId").notNullable();
-		table.text("civilStatus").notNullable().defaultTo("Single");
-		table.text("email").unique().notNullable();
-		table.text("firstName").notNullable();
-		table.text("lastName").notNullable();
-		table.text("levelId").notNullable();
-		table.text("nationalityId").notNullable().defaultTo("BRA");
-		table.text("naturalidade").nullable();
-		table.text("password").notNullable();
-		table.text("roleId").notNullable();
-		table.text("siape").unique().notNullable();
-*/
+import { GlobalStateContext } from "../../store/index";
+import { getAcademicDegrees, getCareers, getLevels, getRoles } from '../../store/reducers/common';
 
 export default function UserForm({handleSubmit}) {
 
-	const [selectedDate, setSelectedDate] = React.useState(new Date());
+	const [state, dispatch] = useContext(GlobalStateContext);
+	// const [selectedDate, setSelectedDate] = React.useState(new Date());
 
-	const handleDateChange = (date) => {
-    setSelectedDate(date);
-  };
+	useEffect(() => {
+        async function fetchCommonData() {
+            getAcademicDegrees(dispatch)
+            getCareers(dispatch)
+            getLevels(dispatch)
+            getRoles(dispatch)
+        }
+        fetchCommonData();
+    }, [])
 
-	const [age, setAge] = React.useState('');
+	// const handleDateChange = (date) => {
+    // 	setSelectedDate(date);
+  	// };
 
-  const handleChange = (event) => {
-    setAge(event.target.value);
-  };
+	const [academicDegreeId, setAcademicDegreeId] = React.useState('');
+	const [careerId, setCareerId] = React.useState('');
+	const [civilStatus, setCivilStatus] = React.useState('');
+	const [levelId, setLevelId] = React.useState('');
+	const [nationalityId, setNationalityId] = React.useState('');
+	const [roleId, setRoleId] = React.useState('');
+
 
 	return (
 		<div className="signup-container">
@@ -44,9 +43,9 @@ export default function UserForm({handleSubmit}) {
 						<Select
 							labelId="demo-simple-select-outlined-label"
 							id="demo-simple-select-outlined"
-							value={age}
+							value={academicDegreeId}
 							fullWidth
-							onChange={handleChange}
+							onChange={(event) => setAcademicDegreeId(event.target.value)}
 							label="Formação"
 						>
 							<MenuItem value="">
@@ -63,9 +62,9 @@ export default function UserForm({handleSubmit}) {
 						<Select
 							labelId="demo-simple-select-outlined-label"
 							id="demo-simple-select-outlined"
-							value={age}
+							value={careerId}
 							fullWidth
-							onChange={handleChange}
+							onChange={(event) => setCareerId(event.target.value)}
 							label="Carreira"
 						>
 							<MenuItem value="">
@@ -82,9 +81,9 @@ export default function UserForm({handleSubmit}) {
 						<Select
 							labelId="demo-simple-select-outlined-label"
 							id="demo-simple-select-outlined"
-							value={age}
+							value={civilStatus}
 							fullWidth
-							onChange={handleChange}
+							onChange={(event) => setCivilStatus(event.target.value)}
 							label="Estado Civil"
 						>
 							<MenuItem value="">
@@ -101,9 +100,9 @@ export default function UserForm({handleSubmit}) {
 						<Select
 							labelId="demo-simple-select-outlined-label"
 							id="demo-simple-select-outlined"
-							value={age}
+							value={levelId}
 							fullWidth
-							onChange={handleChange}
+							onChange={(event) => setLevelId(event.target.value)}
 							label="Nível"
 						>
 							<MenuItem value="">
@@ -120,9 +119,9 @@ export default function UserForm({handleSubmit}) {
 						<Select
 							labelId="demo-simple-select-outlined-label"
 							id="demo-simple-select-outlined"
-							value={age}
+							value={nationalityId}
 							fullWidth
-							onChange={handleChange}
+							onChange={(event) => setNationalityId(event.target.value)}
 							label="Nacionalidade"
 						>
 							<MenuItem value="">
@@ -139,9 +138,9 @@ export default function UserForm({handleSubmit}) {
 						<Select
 							labelId="demo-simple-select-outlined-label"
 							id="demo-simple-select-outlined"
-							value={age}
+							value={roleId}
 							fullWidth
-							onChange={handleChange}
+							onChange={(event) => setRoleId(event.target.value)}
 							label="Perfil"
 						>
 							<MenuItem value="">
