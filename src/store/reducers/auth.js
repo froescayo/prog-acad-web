@@ -47,7 +47,7 @@ export function fakeSignIn(credentials, dispatch) {
     setLoading(true, dispatch);
     return new Promise((resolve, reject) => {
         setTimeout(() => {
-            if(credentials.email === "teste@developer.com" && credentials.password === "1234"){
+            if(credentials.email === "teste@teste.com" && credentials.password === "1234"){
                 login("123456789", dispatch);
                 resolve("123456789");
             }else {

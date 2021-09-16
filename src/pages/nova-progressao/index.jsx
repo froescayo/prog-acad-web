@@ -40,12 +40,18 @@ const NovaProgressao = () => {
             <PaperContainer>
                 <div style={{display: 'flex'}}>
                     <div style={{flex: 1}}>
-                        <Typography variant="h6">
-                            Nome do docente
-                        </Typography>
+                        <div style={{marginBottom: '10px'}}>
+                            <Typography color="textSecondary">
+                                Nome do Docente
+                            </Typography>
+                            
+                            <Typography variant="h6">
+                                Nome do docente
+                            </Typography>
+                        </div>
 
-                        <div>
-                            <Typography>
+                        <div style={{marginBottom: '10px'}}>
+                            <Typography color="textSecondary">
                                 Tipo de Solicitação
                             </Typography>
 
@@ -64,44 +70,51 @@ const NovaProgressao = () => {
                         </div>
                     </div>
                     <div style={{flex: 1}}>
-                        <Typography variant="h6">
+                        <Typography color="textSecondary">
                             SIAPE
                         </Typography>
 
+                        <Typography variant="h6">
+                            35432135
+                        </Typography>
+
                         <div>
-                            <Typography>
+                            <Typography color="textSecondary">
                                 Interstício
                             </Typography>
                             
-                            <div style={{display: 'flex', gap: 8}}>
-                                <TextField
-                                    id="date"
-                                    label="Início"
-                                    size="small"
-                                    variant="outlined"
-                                    type="date"
-                                    InputLabelProps={{
-                                        shrink: true,
-                                    }}
-                                />
+                            <FormControl>
+                                <div style={{display: 'flex', gap: 8, marginTop: '12px'}}>
+                                
+                                    <TextField
+                                        id="date"
+                                        label="Início"
+                                        size="small"
+                                        variant="outlined"
+                                        type="date"
+                                        InputLabelProps={{
+                                            shrink: true,
+                                        }}
+                                    />
 
-                                <TextField
-                                    id="date"
-                                    label="Fim"
-                                    size="small"
-                                    variant="outlined"
-                                    type="date"
-                                    InputLabelProps={{
-                                        shrink: true,
-                                    }}
-                                />
-                            </div>
+                                    <TextField
+                                        id="date"
+                                        label="Fim"
+                                        size="small"
+                                        variant="outlined"
+                                        type="date"
+                                        InputLabelProps={{
+                                            shrink: true,
+                                        }}
+                                    />
+                                </div>
+                            </FormControl>
                         </div>
                     </div>
                 </div>
 
                 <div>
-                    <Typography>Comissão</Typography>
+                    <Typography color="textSecondary">Comissão</Typography>
 
                     <div style={{display: 'flex', gap: 24, marginBottom: 16}}>
                         <TextField label="Professor" />

@@ -20,7 +20,13 @@ const theme = createTheme({
       main: '#086972',
     }
   },
-  spacing: 8
+  spacing: 8,
+  typography: {
+    fontFamily: "'Poppins', sans-serif'",
+    allVariants: {
+      fontFamily: "'Poppins', sans-serif'"
+    }
+  }
 })
 
 function App() {
