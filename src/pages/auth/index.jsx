@@ -1,9 +1,10 @@
-import { signIn, signUp, fakeSignIn } from "../../store/reducers/auth"
+import { signUp, fakeSignIn } from "../../store/reducers/auth"
 import LoginForm from '../../components/LoginForm';
 import { Route, useHistory } from 'react-router-dom';
 import UserForm from '../../components/UserForm';
 import { useContext } from "react";
 import { GlobalStateContext } from "../../store";
+import { Container } from "@material-ui/core";
 
 import './style.css';
 
@@ -14,17 +15,16 @@ function Auth() {
 
     const handleSignInSubmit = (event) => {
         event.preventDefault();
-        console.log({
-            email: event.target.email.value,
-            password: event.target.password.value,
-        })
 
         fakeSignIn({
             email: event.target.email.value,
             password: event.target.password.value,
         }, dispatch).then(r => {
             history.push("/");
-        })
+        }).catch(console.log);
+        if(state.auth.user) {
+            history.push("/");
+        }
     }
 
     const handleSignupSubmit = (event) => {
@@ -35,16 +35,14 @@ function Auth() {
     }
 
     return (
-        <div className="auth">
-            <div className="title-auth-container">
-                <div className="title-auth">
-                    <h1 className="procad">procad</h1>
-                    <p className="subtitle">Sistema de progressão e promoção de carreira acadêmica</p>
-                </div>
-            </div>
-            <Route path="/login" component={() => <LoginForm handleSubmit={handleSignInSubmit} />} />
-            <Route path="/cadastro" component={() => <UserForm handleSubmit={handleSignupSubmit} />} />
-        </div>
+        <Container>
+            <Route path="/login">
+                <LoginForm handleSubmit={handleSignInSubmit} />
+            </Route>
+            <Route path="/cadastro">
+                <UserForm handleSubmit={handleSignupSubmit} />
+            </Route>
+        </Container>
     )
 }
 
