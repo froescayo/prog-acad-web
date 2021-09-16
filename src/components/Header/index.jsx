@@ -9,6 +9,8 @@ import {
 	Button
 } from '@material-ui/core';
 
+import { Link, useHistory } from 'react-router-dom';
+
 import { AccountCircle } from '@material-ui/icons';
 
 import styles from "./styles";
@@ -17,6 +19,7 @@ import styles from "./styles";
 function Header() {
 
 	const classes = styles();
+	const history = useHistory();
 
 	const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -33,10 +36,12 @@ function Header() {
 		<AppBar position="static" className={classes.root}>
 			<Toolbar className={classes.container}>
 				<div className={classes.wrapper}>
-
-				<Typography variant="h6" className={classes.appTitle}>
-					procad
-				</Typography>
+				
+				<div className={classes.appTitleWrapper}>
+					<Typography variant="h6" className={classes.appTitle} onClick={() => history.push("/")}>
+						procad
+					</Typography>
+				</div>
 				
 				<div className={classes.userMenu}>
 					<Button

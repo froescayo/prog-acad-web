@@ -12,6 +12,7 @@ import Store from './store';
 import NovaProgressao from './pages/nova-progressao';
 import Header from './components/Header';
 import RelatorioAtividades from './pages/relatorio-atividades';
+import Activities from './pages/activities';
 
 const theme = createTheme({
   palette: {
@@ -46,6 +47,10 @@ function App() {
 
             <PrivateRoute path="/relatorio-de-atividades">
               <RelatorioAtividades/>
+            </PrivateRoute>
+
+            <PrivateRoute path="/activities">
+              <Activities/>
             </PrivateRoute>
           </div>
 

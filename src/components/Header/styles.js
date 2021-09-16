@@ -18,10 +18,13 @@ const styles = makeStyles((theme) => ({
         paddingRight: '24px',
     },
     appTitle: {
-        paddingLeft: '24px',
         fontSize: '40px',
         fontWeight: 'bold',
+        cursor: 'pointer'
+    },
+    appTitleWrapper: {
         flexGrow: 1,
+        paddingLeft: '24px',
     }
 }))
 
