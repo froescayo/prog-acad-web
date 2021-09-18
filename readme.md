@@ -70,6 +70,7 @@ Link: https://whimsical.com/arquitetura-da-aplicacao-72ThrruL54ybvGVZX3mMfc
 - HTML5
 - CSS3
 - JS
+- FIGMA (https://www.figma.com/file/USqRlD1bGXuE3YP17iC3ea/PROCAD?node-id=0%3A1)
 - ReactJS
 ## [Back-End](https://github.com/froescayo/prog-acad-api)
 
@@ -82,7 +83,7 @@ Link: https://whimsical.com/arquitetura-da-aplicacao-72ThrruL54ybvGVZX3mMfc
 - ## Como Rodar o front-end
 - ## Como Rodar o back-end
   - Acessar [How To](https://github.com/froescayo/prog-acad-api)
-# Projeto de Implantação
+# Documento de Implantação
 - Sistema Operacional: 
   - O sistema é independente de SO, pois está sendo implatado sob a virtualização oferecida pelos containers do docker. Deste modo, no que se refere a sistema operacional, é exigido que host onde o sistema será instalado, possua ambiente docker instalado.
 - Requisitos mínimos de memória e processamento:
