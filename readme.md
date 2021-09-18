@@ -70,7 +70,7 @@ Link: https://whimsical.com/arquitetura-da-aplicacao-72ThrruL54ybvGVZX3mMfc
 - HTML5
 - CSS3
 - JS
-- FIGMA (https://www.figma.com/file/USqRlD1bGXuE3YP17iC3ea/PROCAD?node-id=0%3A1)
+- [FIGMA](https://www.figma.com/file/USqRlD1bGXuE3YP17iC3ea/PROCAD?node-id=0%3A1)
 - ReactJS
 ## [Back-End](https://github.com/froescayo/prog-acad-api)
 
