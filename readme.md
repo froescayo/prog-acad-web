@@ -118,7 +118,16 @@ Link: https://whimsical.com/arquitetura-da-aplicacao-72ThrruL54ybvGVZX3mMfc
     - Professor avaliador, será permitido:
       - Visualizar e avaliar o processo de progressão
 # Proposta de Testes
-Quem irá testar o sistema ? Será a equipe
+
+- Como testar o seu portal web ?
+  - No próprio portal
+- Utilização alguma ferramenta ?
+  - No proprio portal
+  - Requisições por meio do Insominia
+- Serão realizados testes unitários ?
+  - Não
+- Quem irá testar o sistema ? 
+  - Será a equipe
 [Documento de Caso de Teste](https://docs.google.com/document/d/18urdVJDw2veKayaqE6ScBmAvY70f-yxZVegUkVgeGYw/edit)
 
   
