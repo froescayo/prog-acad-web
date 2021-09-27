@@ -1,19 +1,20 @@
 import React from 'react';
 import { Typography } from '@material-ui/core';
 import { ArrowForward } from '@material-ui/icons';
-import { Link } from 'react-router-dom';
+import { Link, useRouteMatch } from 'react-router-dom';
 
 import styles from './styles';
 
 
-const AreaItem = () => {
+const AreaItem = ({campo}) => {
     const classes = styles();
-    
+    const match = useRouteMatch();
+
     return (
-        <Link to="/activities" className={classes.link}>
+        <Link to={`${match.url}/${campo.id}`} className={classes.link}>
             <div className={classes.wrapper}>
                 <Typography variant="h6" style={{flex: 1}}>
-                    Campo I - Atividades etc ...
+                    {campo.campo}
                 </Typography>
 
                 <ArrowForward/>

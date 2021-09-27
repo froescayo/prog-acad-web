@@ -54,10 +54,6 @@ function App() {
             <PrivateRoute path="/relatorio-de-atividades">
               <RelatorioAtividades/>
             </PrivateRoute>
-
-            <PrivateRoute path="/activities">
-              <Activities/>
-            </PrivateRoute>
           </div>
 
           {/* <Route path="/" component={Dashboard} /> */}

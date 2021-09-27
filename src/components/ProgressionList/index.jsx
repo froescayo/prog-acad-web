@@ -16,15 +16,18 @@ export default function ProgressionList() {
                 size="large"
                 startIcon={<Add />}
             >
-                Nova Progressão
+                Nova Solicitação
             </Button>
             </Link>
         </div>
 
         <PaperContainer>
-                <Typography variant="h6">Progression List</Typography>
-                <div style={{textAlign: 'center', marginTop: '10px'}}>
-                    <Typography variant="h6" color="disabled">Nenhuma solicitação em progresso</Typography>
+                <Typography variant="h6">Lista de Solicitações</Typography>
+
+                <div>
+                    <div style={{textAlign: 'center', marginTop: '10px'}}>
+                        <Typography variant="body1" color="textSecondary">Nenhuma solicitação em progresso</Typography>
+                    </div>
                 </div>
         </PaperContainer>
 
