@@ -29,9 +29,10 @@ function Auth() {
 
     const handleSignupSubmit = (event) => {
         event.preventDefault();
-        signUp({
+        console.log(event.target);
+        // signUp({
 
-        }, dispatch);
+        // }, dispatch);
     }
 
     return (

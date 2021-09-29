@@ -66,7 +66,11 @@ export default function UserForm({ handleSubmit }) {
 									onChange={(event) => setAcademicDegreeId(event.target.value)}
 									label="Formação"
 								>
-									
+									{ state.common.academicDegrees.map(acd => (
+										<MenuItem value={acd.id} key={acd.id}>
+											{ acd.name }
+										</MenuItem>
+									)) }
 								</Select>
 								</FormControl>
 							</Grid>
@@ -81,9 +85,11 @@ export default function UserForm({ handleSubmit }) {
 									onChange={(event) => setCareerId(event.target.value)}
 									label="Carreira"
 								>
-									<MenuItem value="">
-										<em>None</em>
-									</MenuItem>
+									{ state.common.careers.map(career => (
+										<MenuItem value={career.id} key={career.id}>
+											{ career.name }
+										</MenuItem>
+									)) }
 								</Select>
 								</FormControl>
 							</Grid>
@@ -124,12 +130,11 @@ export default function UserForm({ handleSubmit }) {
 									onChange={(event) => setLevelId(event.target.value)}
 									label="Nível"
 								>
-									<MenuItem value="">
-										<em>None</em>
-									</MenuItem>
-									<MenuItem value={10}>Ten</MenuItem>
-									<MenuItem value={20}>Twenty</MenuItem>
-									<MenuItem value={30}>Thirty</MenuItem>
+									{ state.common.levels.map(level => (
+										<MenuItem value={level.id} key={level.id}>
+											{ level.name }
+										</MenuItem>
+									)) }
 								</Select>
 								</FormControl>
 							</Grid>
@@ -144,12 +149,11 @@ export default function UserForm({ handleSubmit }) {
 									onChange={(event) => setNationalityId(event.target.value)}
 									label="Nacionalidade"
 								>
-									<MenuItem value="">
-										<em>None</em>
-									</MenuItem>
-									<MenuItem value={10}>Ten</MenuItem>
-									<MenuItem value={20}>Twenty</MenuItem>
-									<MenuItem value={30}>Thirty</MenuItem>
+									{ state.common.nationalities.map(nat => (
+										<MenuItem value={nat.id} key={nat.id}>
+											{ nat.name }
+										</MenuItem>
+									)) }
 								</Select>
 								</FormControl>
 							</Grid>
@@ -164,12 +168,11 @@ export default function UserForm({ handleSubmit }) {
 									onChange={(event) => setRoleId(event.target.value)}
 									label="Perfil"
 								>
-									<MenuItem value="">
-										<em>None</em>
-									</MenuItem>
-									<MenuItem value={10}>Ten</MenuItem>
-									<MenuItem value={20}>Twenty</MenuItem>
-									<MenuItem value={30}>Thirty</MenuItem>
+									{ state.common.roles.map(role => (
+										<MenuItem value={role.id} key={role.id}>
+											{ role.name }
+										</MenuItem>
+									)) }
 								</Select>
 								</FormControl>
 							</Grid>
