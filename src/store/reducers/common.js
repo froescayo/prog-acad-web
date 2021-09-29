@@ -66,36 +66,40 @@ export const setRoles = (roles, dispatch) => dispatch({type: ActionsTypes.ROLE, 
 export const clearAll = (dispatch) => dispatch({type: ActionsTypes.CLEAR_ALL, payload: null}) 
 
 export function getAcademicDegrees(dispatch) {
-    return axios.post('/academicDegree')
+    return axios.get('/academicDegree')
         .then(r => {
             console.log(r);
+            setAcademicDegrees(r, dispatch)
         }).catch(err => {
             console.log(err);
         })
 }
 
 export function getCareers(dispatch) {
-    return axios.post('/career')
+    return axios.get('/career')
         .then(r => {
             console.log(r);
+            setCareers(r, dispatch)
         }).catch(err => {
             console.log(err);
         })
 }
 
 export function getLevels(dispatch) {
-    return axios.post('/level')
+    return axios.get('/level')
         .then(r => {
             console.log(r);
+            setLevels(r, dispatch)
         }).catch(err => {
             console.log(err);
         })
 }
 
 export function getRoles(dispatch) {
-    return axios.post('/roles')
+    return axios.get('/roles')
         .then(r => {
             console.log(r);
+            setRoles(r, dispatch)
         }).catch(err => {
             console.log(err);
         })
