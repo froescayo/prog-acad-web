@@ -4,11 +4,12 @@ import { Redirect, Route } from "react-router-dom"
 
 function PrivateRoute({ children, ...rest }) {
 	const [state, dispatch] = useContext(GlobalStateContext);
+	const token = localStorage.getItem("token");
 	return (
 		<Route
 			{...rest}
 			render={({ location }) =>
-				state.auth.user ? (
+			token ? (
 					children
 				) : (
 					<Redirect

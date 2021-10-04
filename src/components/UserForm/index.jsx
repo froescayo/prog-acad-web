@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { 
 	TextField, 
 	Button, 
@@ -12,7 +12,7 @@ import {
 
 import { Link } from 'react-router-dom';
 import { GlobalStateContext } from "../../store/index";
-import { getAcademicDegrees, getCareers, getLevels, getRoles } from '../../store/reducers/common';
+import { getAcademicDegrees, getCareers, getLevels, getRoles, getNationalities } from '../../store/reducers/common';
 import { CIVIL_STATUS } from '../../utils/constants';
 
 import './style.css';
@@ -28,6 +28,7 @@ export default function UserForm({ handleSubmit }) {
 			getCareers(dispatch)
 			getLevels(dispatch)
 			getRoles(dispatch)
+			getNationalities(dispatch)
 		}
 		fetchCommonData();
 	}, [dispatch])
@@ -36,13 +37,43 @@ export default function UserForm({ handleSubmit }) {
 	// 	setSelectedDate(date);
 	// };
 
-	const [academicDegreeId, setAcademicDegreeId] = React.useState('');
-	const [careerId, setCareerId] = React.useState('');
-	const [civilStatus, setCivilStatus] = React.useState('');
-	const [levelId, setLevelId] = React.useState('');
-	const [nationalityId, setNationalityId] = React.useState('');
-	const [roleId, setRoleId] = React.useState('');
+	const [academicDegreeId, setAcademicDegreeId] = useState('');
+	const [careerId, setCareerId] = useState('');
+	const [civilStatus, setCivilStatus] = useState('');
+	const [levelId, setLevelId] = useState('');
+	const [nationalityId, setNationalityId] = useState('');
+	const [roleId, setRoleId] = useState('');
+	const [birthdate, setBirthdate] = useState(null);
+	const [email, setEmail] = useState('')
+	const [firstName, setFirstName] = useState('');
+	const [lastName, setLastName] = useState('');
+	const [naturalidade, setNaturalidade] = useState('');
+	const [password, setPassword] = useState('');
+	const [siape, setSiape] = useState('');
+	const [workload, setWorkload] = useState('');
 
+	const onSubmit = (event) => {
+		event.preventDefault();
+
+		const dto = {
+			academicDegreeId, // id do grau academico
+			birthdate, // data de aniversario, nulavel
+			careerId, // id da carreira
+			civilStatus,
+			email,
+			firstName,
+			lastName,
+			levelId, // id do nivel correspondente
+			nationalityId, // id da nacionalidade
+			naturalidade, // nulavel
+			password,
+			roleId, // id do papel exercido
+			siape,
+			workload, // carga horaria de trabalho
+		}
+
+		handleSubmit(dto)
+	}
 
 	return (
 		<div style={{marginTop: '64px'}}>
@@ -55,6 +86,34 @@ export default function UserForm({ handleSubmit }) {
 						<Typography variant="h5" style={{ marginBottom: '16px', alignSelf: 'start' }}>Cadastro</Typography>
 
 						<Grid container spacing={2}>
+							<Grid item xs={12} md={4} sm={6} lg={3}>
+								<TextField
+									labelId="firstname-input-label"
+									id="firstname-input"
+									value={firstName}
+									variant="outlined"
+									size="small"
+									fullWidth
+									onChange={(event) => setFirstName(event.target.value)}
+									label="Primeiro Nome"
+								/>
+							</Grid>
+							<Grid item xs={12} md={4} sm={6} lg={3}>
+								<FormControl variant="outlined" fullWidth size="small" style={{ marginBottom: '8px' }}>
+								{/* <InputLabel id="formacao-input-label">Primeiro Nome</InputLabel> */}
+								<TextField
+									labelId="lastname-input-label"
+									id="lastname-input"
+									value={lastName}
+									variant="outlined"
+									size="small"
+									fullWidth
+									onChange={(event) => setLastName(event.target.value)}
+									label="Último Nome"
+								/>
+								</FormControl>
+							</Grid>
+							
 							<Grid item xs={12} md={4} sm={6} lg={3}>
 								<FormControl variant="outlined" fullWidth size="small" style={{ marginBottom: '8px' }}>
 								<InputLabel id="formacao-input-label">Formação</InputLabel>
@@ -187,6 +246,8 @@ export default function UserForm({ handleSubmit }) {
 									InputLabelProps={{
 										shrink: true,
 									}}
+									value={birthdate}
+									onChange={(event) => setBirthdate(event.target.value)}
 									style={{ marginBottom: '8px' }}
 								/>
 							</Grid>
@@ -199,6 +260,8 @@ export default function UserForm({ handleSubmit }) {
 									size="small"
 									name="naturalidade"
 									variant="outlined"
+									value={naturalidade}
+									onChange={(event) => setNaturalidade(event.target.value)}
 									style={{ marginBottom: '8px' }}
 								/>
 							</Grid>
@@ -211,6 +274,8 @@ export default function UserForm({ handleSubmit }) {
 									size="small"
 									name="siape"
 									variant="outlined"
+									value={siape}
+									onChange={(event) => setSiape(event.target.value)}
 									style={{ marginBottom: '8px' }}
 								/>
 							</Grid>
@@ -223,6 +288,8 @@ export default function UserForm({ handleSubmit }) {
 									size="small"
 									name="email"
 									variant="outlined"
+									value={email}
+									onChange={(event) => setEmail(event.target.value)}
 									style={{ marginBottom: '8px' }}
 								/>
 							</Grid>
@@ -236,6 +303,22 @@ export default function UserForm({ handleSubmit }) {
 									name="password"
 									autoComplete="current-password"
 									variant="outlined"
+									value={password}
+									onChange={(event) => setPassword(event.target.value)}
+									style={{ marginBottom: '24px' }}
+								/>
+							</Grid>
+
+							<Grid item xs={12} md={4} sm={6} lg={3}>
+								<TextField
+									id="workload-input"
+									fullWidth
+									size="small"
+									label="Workload"
+									name="workload"
+									variant="outlined"
+									value={workload}
+									onChange={(event) => setWorkload(event.target.value)}
 									style={{ marginBottom: '24px' }}
 								/>
 							</Grid>
@@ -244,6 +327,7 @@ export default function UserForm({ handleSubmit }) {
 						<Grid container justifyContent="center">
 							<Grid xs={12} md={4}>
 								<Button
+									onClick={onSubmit}
 									color="primary"
 									variant="contained"
 									type="submit"

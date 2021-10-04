@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { 
     Button, 
     Container, 
@@ -12,6 +12,7 @@ import {
 import { modalStyle } from './styles';
 import PaperContainer from '../PaperContainer';
 import { HighlightOff, CloudUpload } from "@material-ui/icons"
+import { GlobalStateContext } from '../../store';
 
 
 const headerContainer = {
@@ -20,10 +21,22 @@ const headerContainer = {
 
 const AtividadeModal = ({open, handleClose, atividade, onSubmit}) => {
 
+    const [state, dispatch] = useContext(GlobalStateContext);
+
     const [semestre1, setSemestre1] = useState(0);
     const [semestre2, setSemestre2] = useState(0);
     const [semestre3, setSemestre3] = useState(0);
     const [semestre4, setSemestre4] = useState(0);
+
+    let { from = '2021-10-4', to = '2022-10-4' } = (state.formulary.data || {}).period || {};
+
+    const intersticio = {
+
+        period1: `${(new Date(from)).getFullYear()}.1`,
+        period2: `${(new Date(from)).getFullYear()}.2`,
+        period3: `${(new Date(to)).getFullYear()}.1`,
+        period4: `${(new Date(to)).getFullYear()}.2`,
+    }
 
     const getTotal = () => {
         const sum = semestre1 + semestre2 + semestre3 + semestre4;
@@ -48,8 +61,32 @@ const AtividadeModal = ({open, handleClose, atividade, onSubmit}) => {
     }
 
     const handleSubmit = () => {
+        const dataDto = {
+            fieldId: atividade.fieldId, 
+            activityId: atividade.id,
+            answer: [
+                {
+                    semester: intersticio.period1,
+                    points: semestre1
+                },
+                {
+                    semester: intersticio.period2,
+                    points: semestre2
+                },
+                {
+                    semester: intersticio.period3,
+                    points: semestre3
+                },
+                {
+                    semester: intersticio.period4,
+                    points: semestre4
+                },
+            ]
+        }
+        console.log(dataDto);
         const dto = {...atividade, pontuacao: getTotal()}
-        onSubmit(dto);
+        
+        onSubmit(dataDto);
         onClose();
     }
 
@@ -87,12 +124,12 @@ const AtividadeModal = ({open, handleClose, atividade, onSubmit}) => {
                         <div style={{display: 'flex'}}>
                             <div style={{flex: 2}}>
                                 <Typography color="textSecondary" variant="body2">
-                                    Quantidade durante o período: 2020 a 2021
+                                    Quantidade durante o período: {intersticio.period1} a {intersticio.period4}
                                 </Typography>
                                 <div style={{display: 'flex', gap: 8, marginTop: 8}}>
                                     <TextField 
                                         variant="outlined" 
-                                        label="2020.1" 
+                                        label={intersticio.period1} 
                                         type="number" 
                                         size="small"
                                         value={semestre1}
@@ -100,7 +137,7 @@ const AtividadeModal = ({open, handleClose, atividade, onSubmit}) => {
 
                                     <TextField 
                                         variant="outlined" 
-                                        label="2020.2" 
+                                        label={intersticio.period2} 
                                         type="number" 
                                         size="small"
                                         value={semestre2}
@@ -108,7 +145,7 @@ const AtividadeModal = ({open, handleClose, atividade, onSubmit}) => {
 
                                     <TextField 
                                         variant="outlined" 
-                                        label="2021.1" 
+                                        label={intersticio.period3} 
                                         type="number" 
                                         size="small"
                                         value={semestre3}
@@ -116,7 +153,7 @@ const AtividadeModal = ({open, handleClose, atividade, onSubmit}) => {
 
                                     <TextField 
                                         variant="outlined" 
-                                        label="2021.2" 
+                                        label={intersticio.period4} 
                                         type="number" 
                                         size="small"
                                         value={semestre4}

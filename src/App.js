@@ -12,7 +12,18 @@ import Store from './store';
 import NovaProgressao from './pages/nova-progressao';
 import Header from './components/Header';
 import RelatorioAtividades from './pages/relatorio-atividades';
-import Activities from './pages/activities';
+import axios from 'axios';
+
+axios.interceptors.request.use(
+  config => {
+    const token = localStorage.getItem("token");
+    config.headers["x-access-token"] = token;
+    return config;
+  },
+  error => {
+    return Promise.reject(error);
+  }
+)
 
 const theme = createTheme({
   palette: {

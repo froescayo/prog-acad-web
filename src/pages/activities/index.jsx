@@ -1,13 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { 
     Button, 
     Container, 
     IconButton, 
-    Typography, 
-    Modal, 
-    Box, 
-    TextField ,
-    Input
+    Typography
 } from '@material-ui/core';
 import { ArrowBack } from '@material-ui/icons';
 import { Link, useParams } from 'react-router-dom';
@@ -16,35 +12,45 @@ import Campos from '../../services/procad';
 import AtividadeItem from '../../components/AtividadeItem';
 import { modalStyle } from './styles';
 import AtividadeModal from '../../components/AtividadeModal';
+import { getActivities } from '../../store/reducers/report';
+import { GlobalStateContext } from '../../store';
+import { setActivity } from '../../store/reducers/formulary';
 
 
 
 const Activities = () => {
 
     const params = useParams();
-    const [campo, setCampo] = useState(Campos.find(el => el.id == params.campoId));
-    const [atividades, setAtividades] = useState(Campos.find(el => el.id == params.campoId).atividades);
+    const [atividades, setAtividades] = useState([]);
     const [openModal, setOpenModal] = useState(false);
     const [atividadeSelected, setAtividadeSelected] = useState({});
+
+    const [state, dispatch] = useContext(GlobalStateContext);
+
+    const campo = (state.report.fields || []).find(el => el.id === params.campoId) || {}
+
+    useEffect(() => {
+
+        getActivities(params.campoId, dispatch);
+    }, []);
 
     const [atividadesRealizadas, setAtividadesRealizadas] = useState([]);
 
     const handleAtividadesRealizadas = (atividade) => {
-        let alreadyExist = atividadesRealizadas.findIndex(atv => atv.id === atividade.id);
+        let alreadyExist = ((state.formulary.data || {}).answers || []).findIndex(atv => atv.activityId === atividade.activityId);
         if(alreadyExist > -1) {
-            atividadesRealizadas[alreadyExist] = atividade;
+            // atividadesRealizadas[alreadyExist] = atividade;
         }else {
-            atividadesRealizadas.push(atividade)
+            setActivity(atividade, dispatch);
         }
-
-        console.log(atividadesRealizadas)
-
+        console.log(atividade)
+        console.log(state)
         
     }
 
     const getPontuacao = () => {
-        return atividadesRealizadas.reduce((soma, atv) => {
-            soma += Number(atv.pontuacao);
+        return (((state.formulary.data || {}).answers[0] || []).answer || []).reduce((soma, atv) => {
+            soma += Number(atv.points);
             return soma;
         }, 0)
     }
@@ -59,8 +65,8 @@ const Activities = () => {
         setOpenModal(true);
     }
 
-    const isDone = (id) => {
-        return !!atividadesRealizadas.find(atv => atv.id === id);
+    const isDone = (activityId) => {
+        return !!((state.formulary.data || {}).answers || []).find(atv => atv.activityId === activityId);
     }
 
     return (
@@ -78,14 +84,14 @@ const Activities = () => {
 
             <PaperContainer>
                 <div style={{padding: '0 8px 8px 8px'}}>
-                    <Typography>{campo.campo}</Typography>
+                    <Typography>{campo.observacao}</Typography>
                     <Typography variant="subtitle2" color="textSecondary">
-                        {campo.observacao}
+                        {}
                     </Typography>
                 </div>
                 <div style={{maxHeight: '400px', overflowY: 'auto'}}>
                     <div style={{padding: '0 8px'}}>
-                        { atividades.map(atv => <AtividadeItem atividade={atv} key={atv.id} onSelectItem={handleSelectItem} done={isDone(atv.id)}/>) }
+                        { (state.report.activities || []).map(atv => <AtividadeItem atividade={atv} key={atv.id} onSelectItem={handleSelectItem} done={isDone(atv.id)}/>) }
 
                     </div>
                 </div>
@@ -95,9 +101,9 @@ const Activities = () => {
                 </div>
             </PaperContainer>
 
-            <div style={{padding: '8px 0'}}>
-                <Link to="/relatorio-de-atividades">
-                    <Button color="default" variant="contained">Voltar</Button>
+            <div style={{padding: '8px 0', display: 'flex'}}>
+                <Link to="/relatorio-de-atividades" style={{margin: '0 auto', display:'block'}}>
+                    <Button color="default" variant="contained" color="primary">Confirmar</Button>
                 </Link>
             </div>
 

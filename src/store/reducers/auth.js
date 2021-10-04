@@ -59,18 +59,24 @@ export function fakeSignIn(credentials, dispatch) {
 }
 
 export function signIn(credentials, dispatch) {
+    setLoading(true, dispatch);
     return axios.post('/login', credentials)
-        .then(user => {
-            login(user, dispatch)
-            console.log(user);
+        .then(({data}) => {
+            login(data.token, dispatch);
+            localStorage.setItem("token", data.token);
+            console.log(data.token);
         }).catch(err => {
             console.log(err);
         })
+        .finally(res => {setLoading(false, dispatch);})
 }
 
 export function signUp(form, dispatch) {
-    return axios.post("/user", form)
+    return axios.post("/users", form)
         .then(r => {
             console.log(r);
+        })
+        .catch(err => {
+            console.log(err);
         })
 }

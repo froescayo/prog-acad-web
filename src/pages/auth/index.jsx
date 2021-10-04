@@ -1,4 +1,4 @@
-import { signUp, fakeSignIn } from "../../store/reducers/auth"
+import { signUp, fakeSignIn, signIn } from "../../store/reducers/auth"
 import LoginForm from '../../components/LoginForm';
 import { Route, useHistory } from 'react-router-dom';
 import UserForm from '../../components/UserForm';
@@ -16,7 +16,7 @@ function Auth() {
     const handleSignInSubmit = (event) => {
         event.preventDefault();
 
-        fakeSignIn({
+        signIn({
             email: event.target.email.value,
             password: event.target.password.value,
         }, dispatch).then(r => {
@@ -27,12 +27,9 @@ function Auth() {
         }
     }
 
-    const handleSignupSubmit = (event) => {
-        event.preventDefault();
-        console.log(event.target);
-        // signUp({
-
-        // }, dispatch);
+    const handleSignupSubmit = (form) => {
+        console.log(form);
+        signUp(form, dispatch);
     }
 
     return (
