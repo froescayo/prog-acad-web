@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { 
 	AppBar, 
 	Toolbar, 
@@ -14,23 +14,48 @@ import { Link, useHistory } from 'react-router-dom';
 import { AccountCircle } from '@material-ui/icons';
 
 import styles from "./styles";
+import { logout } from '../../store/reducers/auth';
+import { GlobalStateContext } from '../../store';
 
 
 function Header() {
 
 	const classes = styles();
 	const history = useHistory();
+	const [state, dispatch] = useContext(GlobalStateContext)
 
+	const [user, setUser] = useState({
+		firstName: localStorage.getItem("firstName") || "User",
+		lastName: localStorage.getItem("lastName") || "Name",
+		siape: localStorage.getItem("siape") || "XXXXXXX"
+	});
 	const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
+  	const open = Boolean(anchorEl);
+
+	useEffect(() => {
+		
+		if(state.auth.user){
+			setUser(state.auth.user);
+		}
+
+	}, [])
 
 	const handleMenu = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
+    	setAnchorEl(event.currentTarget);
+	};
 
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+	const handleClose = () => {
+		setAnchorEl(null);
+	};
+  	
+  	const handleLogout = () => {
+		setAnchorEl(null);
+		logout(dispatch).then(r => {
+			history.push("/");
+		});
+	}
+
+	
 
 	return (
 		<AppBar position="static" className={classes.root}>
@@ -52,7 +77,7 @@ function Header() {
 						color="inherit"
 					>
 						<AccountCircle style={{marginRight: '10px'}}/>
-						<Typography>User Name</Typography>
+						<Typography>{user.firstName +" "+ user.lastName}</Typography>
 					</Button>
 
 					<Menu
@@ -70,8 +95,8 @@ function Header() {
 						open={open}
 						onClose={handleClose}
 					>
-						<MenuItem onClick={handleClose}>Minha Conta</MenuItem>
-						<MenuItem onClick={handleClose}>Sair</MenuItem>
+						{/* <MenuItem onClick={handleClose}>Minha Conta</MenuItem> */}
+						<MenuItem onClick={handleLogout}>Sair</MenuItem>
 					</Menu>
 				</div>
 

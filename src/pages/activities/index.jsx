@@ -6,22 +6,21 @@ import {
     Typography
 } from '@material-ui/core';
 import { ArrowBack } from '@material-ui/icons';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useHistory } from 'react-router-dom';
 import PaperContainer from '../../components/PaperContainer';
-import Campos from '../../services/procad';
 import AtividadeItem from '../../components/AtividadeItem';
-import { modalStyle } from './styles';
 import AtividadeModal from '../../components/AtividadeModal';
 import { getActivities } from '../../store/reducers/report';
 import { GlobalStateContext } from '../../store';
-import { setActivity } from '../../store/reducers/formulary';
+import { setActivity, updateFormAnswer } from '../../store/reducers/formulary';
 
 
 
 const Activities = () => {
 
     const params = useParams();
-    const [atividades, setAtividades] = useState([]);
+    const history = useHistory();
+
     const [openModal, setOpenModal] = useState(false);
     const [atividadeSelected, setAtividadeSelected] = useState({});
 
@@ -32,27 +31,34 @@ const Activities = () => {
     useEffect(() => {
 
         getActivities(params.campoId, dispatch);
-    }, []);
+    }, [dispatch]);
 
-    const [atividadesRealizadas, setAtividadesRealizadas] = useState([]);
+    // const [atividadesRealizadas, setAtividadesRealizadas] = useState([]);
 
-    const handleAtividadesRealizadas = (atividade) => {
-        let alreadyExist = ((state.formulary.data || {}).answers || []).findIndex(atv => atv.activityId === atividade.activityId);
-        if(alreadyExist > -1) {
-            // atividadesRealizadas[alreadyExist] = atividade;
-        }else {
-            setActivity(atividade, dispatch);
-        }
-        console.log(atividade)
-        console.log(state)
+    let fieldAnswers = (state.formulary.data || {}).dbFormularyAnswers || [].filter(ans => ans.fieldId === params.campoId)
+
+    const handleAtividadesRealizadas = async (atividade) => {
+        
+        atividade.fieldId = params.campoId;
+        atividade.formularyId = params.formularyId
+        await updateFormAnswer(atividade, dispatch);
         
     }
 
     const getPontuacao = () => {
-        return (((state.formulary.data || {}).answers[0] || []).answer || []).reduce((soma, atv) => {
-            soma += Number(atv.points);
-            return soma;
-        }, 0)
+        // return fieldAnswers.reduce((soma, atv) => {
+        //     soma += Number(atv.points);
+        //     return soma;
+        // }, 0)
+        let soma = 0;
+        fieldAnswers.forEach(fan => {
+            let activity = (state.report.activities || []).find(act => fan.activityId === act.id)
+            const sum = Number(fan.answer[0].quantity) + Number(fan.answer[1].quantity) + Number(fan.answer[2].quantity) + Number(fan.answer[3].quantity);
+            let dto = Number(sum/activity.peso);
+            soma += Number((dto * activity.pontos).toFixed(2));
+        })
+        console.log("[SOMA]", soma)
+        return soma;
     }
 
     const handleClose = () => {
@@ -61,22 +67,25 @@ const Activities = () => {
     };
 
     const handleSelectItem = (atividade) => {
-        setAtividadeSelected(atividade);
+        let answers = fieldAnswers.find(act => act.activityId === atividade.id) || {};
+        setAtividadeSelected({...atividade, answers});
         setOpenModal(true);
     }
 
     const isDone = (activityId) => {
-        return !!((state.formulary.data || {}).answers || []).find(atv => atv.activityId === activityId);
+        return !!fieldAnswers.find(atv => atv.activityId === activityId);
+    }
+
+    const goBack = () => {
+        history.goBack();
     }
 
     return (
         <Container>
             <div style={{display: 'flex', alignItems: 'center'}}>
-                <Link to="/relatorio-de-atividades">
-                    <IconButton edge="start" aria-label="voltar">
+                    <IconButton edge="start" aria-label="voltar" onClick={goBack}>
                         <ArrowBack/>
                     </IconButton>
-                </Link>
                 <Typography variant="h6">
                     Adicionar Atividade
                 </Typography>
@@ -103,7 +112,7 @@ const Activities = () => {
 
             <div style={{padding: '8px 0', display: 'flex'}}>
                 <Link to="/relatorio-de-atividades" style={{margin: '0 auto', display:'block'}}>
-                    <Button color="default" variant="contained" color="primary">Confirmar</Button>
+                    <Button variant="contained" color="primary">Confirmar</Button>
                 </Link>
             </div>
 

@@ -2,7 +2,7 @@ import { makeStyles } from "@material-ui/styles"
 
 const styles = makeStyles((theme) => ({
     root: {
-        marginBottom: '80px',
+        marginBottom: '48px',
     },
     container: {
         justifyContent: 'center'

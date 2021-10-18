@@ -63,7 +63,6 @@ export function getActivities(fieldId, dispatch) {
 	return axios.get(`/field/${fieldId}/activities`)
 		.then(({data}) => {
 			setActivities(data, dispatch)
-			console.log(data);
 		}).catch(err => {
 			console.log(err);
 		})

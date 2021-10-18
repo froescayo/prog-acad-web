@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom';
 
 export default function LoginForm({ handleSubmit }) {
 	return (
-		<Grid container alignItems="center" style={{height: '100vh'}} flexWrap="wrap">
-			<Grid justifyContent="end" xs={12} md={6}>
+		<Grid container alignItems="center" flexwrap="wrap" style={{height: '100vh'}} >
+			<Grid justifyContent="flex-end" xs={12} md={6}>
 					<div className="title-auth">
 							<h1 className="procad">procad</h1>
 							<p className="subtitle">Sistema de progressão e promoção de carreira acadêmica</p>

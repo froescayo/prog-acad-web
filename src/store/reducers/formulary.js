@@ -18,8 +18,8 @@ export const formulary = {
 
 export const ActionsTypes = {
 	LOADING: 'loading/formulary',
-	GET_FORMULARIES: 'signin/formulary',
-	GET_FORMULARY: 'logout/formulary',
+	GET_FORMULARIES: 'list/formulary',
+	GET_FORMULARY: 'get/formulary',
 	CLEAR_ALL: 'clear/formulary',
 	SET_ACTIVITY: 'activity/formulary',
 }
@@ -64,10 +64,30 @@ export const setActivity = (data, dispatch) => dispatch({ type: ActionsTypes.SET
 
 export function getFormularies(dispatch) {
 	setLoading(true, dispatch);
-	return axios.get('/formulary')
-		.then(res => {
-			console.log("RESPOSTA: ", res);
-			setFormularies(res, dispatch)
+	return axios.get('/formularies')
+		.then(({data}) => {
+			setFormularies(data, dispatch);
+		})
+		.catch((err) => {
+			if(err.response.status === 401) {
+				localStorage.removeItem("token")
+				localStorage.removeItem("firstName")
+				localStorage.removeItem("lastName")
+				localStorage.removeItem("siape")
+			}
+			return err;
+		})
+		.finally(res => {
+			setLoading(false, dispatch);
+		})
+}
+
+export function getFormulary(formId,dispatch) {
+	setLoading(true, dispatch);
+	return axios.get(`/formulary/${formId}`)
+		.then(({data}) => {
+			setFormulary(data, dispatch);
+			console.log("[formulary]: ", data);
 		})
 		.catch(err => {
 			console.log(err);
@@ -77,11 +97,11 @@ export function getFormularies(dispatch) {
 		})
 }
 
-export function createFormulary(form, dispatch) {
+export function updateFormAnswer(form, dispatch) {
+
 	setLoading(true, dispatch);
-	return axios.post('/formulary', form)
+	return axios.put(`/formularyAnswer`, form)
 		.then(({data}) => {
-			// setFormulary(data, dispatch)
 			console.log(data);
 		})
 		.catch(err => {
@@ -89,6 +109,39 @@ export function createFormulary(form, dispatch) {
 		})
 		.finally(res => {
 			setLoading(false, dispatch);
+		});
+	
+}
+
+
+export function createFormulary(form, dispatch) {
+	setLoading(true, dispatch);
+	return axios.post('/formulary', form)
+		.then(({data}) => {
+			setFormulary(data, dispatch);
+			return data;
+			console.log("[data]", data);
+		})
+		.catch(err => {
+			console.log(err);
+		})
+		.finally(res => {
+			setLoading(false, dispatch);
 		})
 }
 
+export function closeFormulary(form, dispatch) {
+
+	setLoading(true, dispatch);
+	return axios.post(`/formulary/${form.id}/close`, form)
+		.then(({data}) => {
+			console.log(data);
+		})
+		.catch(err => {
+			console.log(err);
+		})
+		.finally(res => {
+			setLoading(false, dispatch);
+		});
+	
+}

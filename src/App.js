@@ -13,6 +13,9 @@ import NovaProgressao from './pages/nova-progressao';
 import Header from './components/Header';
 import RelatorioAtividades from './pages/relatorio-atividades';
 import axios from 'axios';
+import moment from 'moment';
+
+moment.locale();
 
 axios.interceptors.request.use(
   config => {
@@ -58,11 +61,11 @@ function App() {
               <Dashboard />
             </PrivateRoute>
 
-            <PrivateRoute path="/nova-progressao">
+            <PrivateRoute path="/nova-solicitacao">
               <NovaProgressao/>
             </PrivateRoute>
 
-            <PrivateRoute path="/relatorio-de-atividades">
+            <PrivateRoute path="/relatorio-de-atividades/:formularyId">
               <RelatorioAtividades/>
             </PrivateRoute>
           </div>

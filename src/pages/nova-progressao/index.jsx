@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {
 	Container,
 	IconButton,
@@ -13,14 +13,31 @@ import {
 import { ArrowBack, Add, Delete } from "@material-ui/icons";
 import { Link } from 'react-router-dom';
 import PaperContainer from '../../components/PaperContainer';
-import { createFormulary, setFormulary } from '../../store/reducers/formulary';
+import { createFormulary } from '../../store/reducers/formulary';
 import { GlobalStateContext } from '../../store';
+import moment from 'moment';
 import { useHistory } from 'react-router';
 
 
 const NovaProgressao = () => {
 
 	const [state, dispatch] = useContext(GlobalStateContext)
+
+	const [user, setUser] = useState({
+		firstName: localStorage.getItem("firstName") || "User",
+		lastName: localStorage.getItem("lastName") || "Name",
+		siape: localStorage.getItem("siape") || "XXXXXXX"
+	});
+
+	const [endDate, setEndDate] = useState("");
+
+	useEffect(() => {
+		
+		if(state.auth.user){
+			setUser(state.auth.user);
+		}
+
+	}, [state])
 
 	const [solicitacao, setSolicitacao] = React.useState('female');
 
@@ -29,6 +46,16 @@ const NovaProgressao = () => {
 	const handleSolicitacao = (event) => {
 		setSolicitacao(event.target.value);
 	};
+
+	const handleStartDateChange = (event) => {
+		console.log(event.target.value)
+		let x = moment(event.target.value, "yyyy-MM-DD");
+		x.add(2, "y");
+		if(x.isValid()){
+			console.log("RESULT", x.format("yyyy-MM-DD"));
+			setEndDate(x.format("yyyy-MM-DD"))
+		}
+	}
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
@@ -70,15 +97,15 @@ const NovaProgressao = () => {
 					department: terceiroDepartamento.value,
 					institute: terceiroInstituo.value,
 				},
-			],
-			answers: []
+			]
 		}
 
-		
-		setFormulary(dto, dispatch);
-		console.log(state);
-		
-		history.push("/relatorio-de-atividades");
+		//post formulary
+		// setFormulary(dto, dispatch);
+		// console.log(state);
+		createFormulary(dto, dispatch).then(r => {
+			history.push(`/relatorio-de-atividades/${r.id}`);
+		})
 		// createFormulary
 	}
 
@@ -106,7 +133,7 @@ const NovaProgressao = () => {
 							</Typography>
 
 							<Typography variant="h6" color="textSecondary">
-								Nome do docente
+								{user.firstName +" "+ user.lastName}
 							</Typography>
 						</div>
 
@@ -135,7 +162,7 @@ const NovaProgressao = () => {
 						</Typography>
 
 						<Typography variant="h6" color="textSecondary">
-							XXXXXXXX
+							{user.siape}
 						</Typography>
 
 						<div>
@@ -151,6 +178,7 @@ const NovaProgressao = () => {
 										label="Início"
 										size="small"
 										variant="outlined"
+										onChange={handleStartDateChange}
 										type="date"
 										name="dataInicio"
 										InputLabelProps={{
@@ -163,7 +191,9 @@ const NovaProgressao = () => {
 										label="Fim"
 										name="dataFim"
 										size="small"
+										value={endDate}
 										variant="outlined"
+										disabled
 										type="date"
 										InputLabelProps={{
 											shrink: true,

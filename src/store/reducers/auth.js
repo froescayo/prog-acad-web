@@ -41,7 +41,7 @@ export const authReducer = reducerSelector(auth, {
 // ActionCreators
 export const setLoading = (isLoading, dispatch) => dispatch({type: ActionsTypes.LOADING, payload: isLoading});
 export const login = (user, dispatch) => dispatch({type: ActionsTypes.SIGNIN, payload: user})
-export const logout = (dispatch) => dispatch({type: ActionsTypes.LOGOUT, payload: null}) 
+export const setLogout = (dispatch) => dispatch({type: ActionsTypes.LOGOUT, payload: null}) 
 
 export function fakeSignIn(credentials, dispatch) {
     setLoading(true, dispatch);
@@ -58,25 +58,38 @@ export function fakeSignIn(credentials, dispatch) {
     })
 }
 
-export function signIn(credentials, dispatch) {
+export async function signIn(credentials, dispatch) {
     setLoading(true, dispatch);
-    return axios.post('/login', credentials)
+    return await axios.post('/login', credentials)
         .then(({data}) => {
-            login(data.token, dispatch);
+            login(data, dispatch);
             localStorage.setItem("token", data.token);
-            console.log(data.token);
+            localStorage.setItem("firstName", data.firstName);
+            localStorage.setItem("lastName", data.lastName);
+            localStorage.setItem("siape", data.siape);
+
         }).catch(err => {
             console.log(err);
+            throw err;
         })
         .finally(res => {setLoading(false, dispatch);})
 }
 
-export function signUp(form, dispatch) {
-    return axios.post("/users", form)
+export async function logout(dispatch) {
+    
+    setLogout(dispatch);
+    localStorage.removeItem("token");
+    localStorage.removeItem("inf");
+    return true;
+}
+
+export async function signUp(form, dispatch) {
+    return await axios.post("/users", form)
         .then(r => {
             console.log(r);
         })
         .catch(err => {
             console.log(err);
+            throw err
         })
 }

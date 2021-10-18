@@ -11,7 +11,7 @@ const AreaItem = ({campo}) => {
     const match = useRouteMatch();
 
     return (
-        <Link to={`${match.url}/${campo.id}`} className={classes.link}>
+        <Link to={`${match.url}/campo/${campo.id}`} className={classes.link}>
             <div className={classes.wrapper}>
                 <Typography variant="h6" style={{flex: 1}}>
                     {campo.campo}

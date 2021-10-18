@@ -325,7 +325,7 @@ export default function UserForm({ handleSubmit }) {
 						</Grid>
 						
 						<Grid container justifyContent="center">
-							<Grid xs={12} md={4}>
+							<Grid item xs={12} md={4}>
 								<Button
 									onClick={onSubmit}
 									color="primary"

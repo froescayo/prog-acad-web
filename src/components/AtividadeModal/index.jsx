@@ -1,15 +1,13 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { 
     Button, 
     Container, 
     IconButton, 
     Typography, 
     Modal, 
-    Box, 
     TextField ,
     Input
 } from '@material-ui/core';
-import { modalStyle } from './styles';
 import PaperContainer from '../PaperContainer';
 import { HighlightOff, CloudUpload } from "@material-ui/icons"
 import { GlobalStateContext } from '../../store';
@@ -28,7 +26,7 @@ const AtividadeModal = ({open, handleClose, atividade, onSubmit}) => {
     const [semestre3, setSemestre3] = useState(0);
     const [semestre4, setSemestre4] = useState(0);
 
-    let { from = '2021-10-4', to = '2022-10-4' } = (state.formulary.data || {}).period || {};
+    let { from = '2021-10-4', to = '2022-10-4' } = (state.formulary.data || {}).dbFormulary || {};
 
     const intersticio = {
 
@@ -37,6 +35,27 @@ const AtividadeModal = ({open, handleClose, atividade, onSubmit}) => {
         period3: `${(new Date(to)).getFullYear()}.1`,
         period4: `${(new Date(to)).getFullYear()}.2`,
     }
+
+    useEffect(() => {
+        let { from = '2021-10-4', to = '2022-10-4' } = (state.formulary.data || {}).dbFormulary || {};
+        
+        let models = [
+            {period: `${(new Date(from)).getFullYear()}.1`, cb: setSemestre1},
+            {period: `${(new Date(from)).getFullYear()}.2`, cb: setSemestre2},
+            {period: `${(new Date(to)).getFullYear()}.1`, cb: setSemestre3},
+            {period: `${(new Date(to)).getFullYear()}.2`, cb: setSemestre4},
+        ]
+        models.forEach(m => {
+            console.log(m);
+            let dto = (atividade || {}).answers
+            let answer = (dto || {}).answer || [];
+            let exist = answer.find(ans => ans.semester === m.period)
+            if(exist) m.cb(exist.points)
+        })
+    }, [atividade])
+
+
+    
 
     const getTotal = () => {
         const sum = semestre1 + semestre2 + semestre3 + semestre4;
@@ -61,33 +80,37 @@ const AtividadeModal = ({open, handleClose, atividade, onSubmit}) => {
     }
 
     const handleSubmit = () => {
-        const dataDto = {
-            fieldId: atividade.fieldId, 
+        
+        let answers = (atividade || {}).answers || {}
+        const formDto = {
+            id: answers.id || null,
+            formularyId: null,
+            fieldId: null,
             activityId: atividade.id,
-            answer: [
+            answers: [
                 {
                     semester: intersticio.period1,
-                    points: semestre1
+                    quantity: semestre1
                 },
                 {
                     semester: intersticio.period2,
-                    points: semestre2
+                    quantity: semestre2
                 },
                 {
                     semester: intersticio.period3,
-                    points: semestre3
+                    quantity: semestre3
                 },
                 {
                     semester: intersticio.period4,
-                    points: semestre4
+                    quantity: semestre4
                 },
-            ]
-        }
-        console.log(dataDto);
-        const dto = {...atividade, pontuacao: getTotal()}
+                ]
+            }
+        // const dto = {...atividade, pontuacao: getTotal()}
         
-        onSubmit(dataDto);
-        onClose();
+        onSubmit(formDto).then(r => {
+            // onClose();
+        });
     }
 
     return (

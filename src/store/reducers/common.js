@@ -79,7 +79,6 @@ export const clearAll = (dispatch) => dispatch({type: ActionsTypes.CLEAR_ALL, pa
 export function getNationalities(dispatch) {
     return axios.get('/nationality')
         .then(r => {
-            console.log(r.data);
             setNationalities(r.data, dispatch)
         }).catch(err => {
             console.log(err);
@@ -89,7 +88,6 @@ export function getNationalities(dispatch) {
 export function getAcademicDegrees(dispatch) {
     return axios.get('/academicDegree')
         .then(r => {
-            console.log(r.data);
             setAcademicDegrees(r.data, dispatch)
         }).catch(err => {
             console.log(err);
@@ -99,7 +97,6 @@ export function getAcademicDegrees(dispatch) {
 export function getCareers(dispatch) {
     return axios.get('/career')
         .then(r => {
-            console.log(r.data);
             setCareers(r.data, dispatch)
         }).catch(err => {
             console.log(err);
@@ -109,7 +106,6 @@ export function getCareers(dispatch) {
 export function getLevels(dispatch) {
     return axios.get('/level')
         .then(r => {
-            console.log(r.data);
             setLevels(r.data, dispatch)
         }).catch(err => {
             console.log(err);
@@ -119,7 +115,6 @@ export function getLevels(dispatch) {
 export function getRoles(dispatch) {
     return axios.get('/roles')
         .then(r => {
-            console.log(r.data);
             setRoles(r.data, dispatch)
         }).catch(err => {
             console.log(err);
