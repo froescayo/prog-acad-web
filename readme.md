@@ -29,9 +29,14 @@ https://prog-acad.herokuapp.com/
 Link: https://whimsical.com/arquitetura-da-aplicacao-72ThrruL54ybvGVZX3mMfc
 
 # [Diagramas UML](https://github.com/froescayo/prog-acad-web/tree/master/Diagramas%20UML)
-- Caso de Uso
-- Classes
-- Sequencia
+
+### Caso de Uso
+
+<img src="./Diagramas UML/Diagrama de Caso de Uso.jpeg" width="700">
+
+### Sequencia
+
+<img src="./Diagramas UML/Diagrama de Sequencia.jpeg" width="700">
 
 # Regras de Negócio
 
