@@ -86,6 +86,19 @@ Link: https://whimsical.com/arquitetura-da-aplicacao-72ThrruL54ybvGVZX3mMfc
 - Docker (Infraestrutura)
 # Deploy
 - ## Como Rodar o front-end
+
+- Dependências
+  - nodejs
+  - npm
+  - yarn
+
+  1) Digite o comando no terminal > git clone https://github.com/froescayo/prog-acad-web.git
+
+  2) Após isso entre na pasta do projeto ainda no terminal com > cd prog-acad-web
+
+  3) Em seguida digite > npm install
+
+  4) Por fim > npm start
 - ## Como Rodar o back-end
   - Acessar [How To](https://github.com/froescayo/prog-acad-api)
 # Documento de Implantação
