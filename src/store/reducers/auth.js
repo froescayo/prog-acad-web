@@ -79,17 +79,23 @@ export async function logout(dispatch) {
     
     setLogout(dispatch);
     localStorage.removeItem("token");
-    localStorage.removeItem("inf");
+    localStorage.removeItem("firstName");
+    localStorage.removeItem("lastName");
+    localStorage.removeItem("siape");
     return true;
 }
 
 export async function signUp(form, dispatch) {
+    setLoading(true, dispatch);
     return await axios.post("/users", form)
-        .then(r => {
-            console.log(r);
+        .then(({data}) => {
+            return data
         })
         .catch(err => {
             console.log(err);
             throw err
+        })
+        .finally(r => {
+            setLoading(false, dispatch);
         })
 }

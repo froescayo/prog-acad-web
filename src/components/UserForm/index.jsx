@@ -14,6 +14,7 @@ import { Link } from 'react-router-dom';
 import { GlobalStateContext } from "../../store/index";
 import { getAcademicDegrees, getCareers, getLevels, getRoles, getNationalities } from '../../store/reducers/common';
 import { CIVIL_STATUS } from '../../utils/constants';
+import { CircularProgress, Box } from "@mui/material"
 
 import './style.css';
 
@@ -77,6 +78,7 @@ export default function UserForm({ handleSubmit }) {
 
 	return (
 		<div style={{marginTop: '64px'}}>
+			
 			<div className="app-title-container">
 				<h1 className="app-title">procad</h1>
 			</div>

@@ -17,11 +17,17 @@ import { createFormulary } from '../../store/reducers/formulary';
 import { GlobalStateContext } from '../../store';
 import moment from 'moment';
 import { useHistory } from 'react-router';
+import { CircularProgress, Snackbar } from '@mui/material';
+import MuiAlert from "@mui/material/Alert";
 
+const SnackAlert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 const NovaProgressao = () => {
 
 	const [state, dispatch] = useContext(GlobalStateContext)
+	const history = useHistory();
 
 	const [user, setUser] = useState({
 		firstName: localStorage.getItem("firstName") || "User",
@@ -31,6 +37,13 @@ const NovaProgressao = () => {
 
 	const [endDate, setEndDate] = useState("");
 
+	const [solicitacao, setSolicitacao] = React.useState('female');
+	const [open, setOpen] = React.useState(false);
+    const [errorMessage, setErrorMessage] = React.useState("");
+    const [success, setSuccess] = React.useState(false)
+	
+
+
 	useEffect(() => {
 		
 		if(state.auth.user){
@@ -39,9 +52,21 @@ const NovaProgressao = () => {
 
 	}, [state])
 
-	const [solicitacao, setSolicitacao] = React.useState('female');
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+        return;
+        }
+        setOpen(false);
+        setErrorMessage("");
+    };
+    const handleCloseSuccess = (event, reason) => {
+        if (reason === 'clickaway') {
+        return;
+        }
+        setSuccess(false);
+    };
 
-	const history = useHistory();
+	
 
 	const handleSolicitacao = (event) => {
 		setSolicitacao(event.target.value);
@@ -52,12 +77,15 @@ const NovaProgressao = () => {
 		let x = moment(event.target.value, "yyyy-MM-DD");
 		x.add(2, "y");
 		if(x.isValid()){
-			console.log("RESULT", x.format("yyyy-MM-DD"));
 			setEndDate(x.format("yyyy-MM-DD"))
 		}
 	}
 
-	const handleSubmit = (event) => {
+	const handleCancelarSolicitacao = () => {
+		history.push("/")
+	}
+
+	const handleSubmit = async (event) => {
 		event.preventDefault();
 		const {
 			tipoSolicitacao,
@@ -81,37 +109,52 @@ const NovaProgressao = () => {
 				from: dataInicio.value,
 				to: dataFim.value,
 			},
-			comission: [
-				{
-					professorName: primeiroProfessor.value,
-					department: primeiroDepartamento.value,
-					institute: primeiroInstituto.value,
-				},
-				{
-					professorName: segundoProfessor.value,
-					department: segundoDepartamento.value,
-					institute: segundoInstituto.value,
-				},
-				{
-					professorName: terceiroProfessor.value,
-					department: terceiroDepartamento.value,
-					institute: terceiroInstituo.value,
-				},
-			]
+			comission: []
+		}
+		if(primeiroProfessor.value){
+			dto.comission.push({
+				professorName: primeiroProfessor.value,
+				department: primeiroDepartamento.value,
+				institute: primeiroInstituto.value,
+			})
+		}
+
+		if(segundoProfessor.value){
+			dto.comission.push({
+				professorName: segundoProfessor.value,
+				department: segundoDepartamento.value,
+				institute: segundoInstituto.value,
+			})
+		}
+
+		if(terceiroProfessor.value){
+			dto.comission.push({
+				professorName: terceiroProfessor.value,
+				department: terceiroDepartamento.value,
+				institute: terceiroInstituo.value,
+			})
 		}
 
 		//post formulary
 		// setFormulary(dto, dispatch);
 		// console.log(state);
-		createFormulary(dto, dispatch).then(r => {
-			history.push(`/relatorio-de-atividades/${r.id}`);
-		})
+		try {
+			const data = await createFormulary(dto, dispatch)
+			setSuccess(true);
+			history.push(`/relatorio-de-atividades/${data.id}`);
+		} catch (error) {
+			setErrorMessage(error.response.data.error)
+			setOpen(true);
+		}
+		
 		// createFormulary
 	}
 
 	return (
 		<Container>
-
+			{state.formulary.loading && <div style={{width: "100%", height: "100%", zIndex: 3001, top: 0, left: 0, position: "fixed", display: "flex", justifyContent: "center", alignItems: "center", background: "rgba(0,0,0,.3)"}}>
+				<CircularProgress />
+			</div>}
 			<div style={{ display: 'flex', alignItems: 'center' }}>
 				<Link to="/">
 					<IconButton edge="start" aria-label="voltar">
@@ -233,6 +276,7 @@ const NovaProgressao = () => {
 						color="secondary"
 						size="large"
 						type="button"
+						onClick={handleCancelarSolicitacao}
 						startIcon={<Delete />}>
 						Cancelar Solicitação
 					</Button>
@@ -249,6 +293,16 @@ const NovaProgressao = () => {
 						</Button>
 				</div>
 				</form>
+				<Snackbar open={open} autoHideDuration={3500} onClose={handleClose}>
+					<SnackAlert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+						{errorMessage}
+					</SnackAlert>
+				</Snackbar>
+				<Snackbar open={success} autoHideDuration={3500} onClose={handleCloseSuccess}>
+					<SnackAlert onClose={handleCloseSuccess} severity="success" sx={{ width: '100%' }}>
+						Solicitação Criada!
+					</SnackAlert>
+				</Snackbar>
 			</PaperContainer>
 		</Container>
 	);

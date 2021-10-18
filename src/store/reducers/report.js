@@ -5,6 +5,7 @@ import axios from 'axios';
 export const report = {
 	fields: [],
 	activities: [],
+	allActivities: [],
 	loading: false
 }
 
@@ -12,7 +13,9 @@ export const ActionsTypes = {
 	LOADING: 'loading/report',
 	GET_FIELDS: 'fields/report',
 	GET_ACTIVITIES: 'activities/report',
-	CLEAR_ALL: 'clear/report'
+	CLEAR_ALL: 'clear/report',
+	SET_ALL_ACTIVITIES: 'allActivities/report',
+
 }
 
 export const reportReducer = reducerSelector(report, {
@@ -36,6 +39,13 @@ export const reportReducer = reducerSelector(report, {
 			activities: action.payload
 		}
 		return dto
+	},
+	[ActionsTypes.SET_ALL_ACTIVITIES](state, action) {
+		const dto = {
+			...state,
+			allActivities: action.payload
+		}
+		return dto
 	}
 })
 
@@ -43,6 +53,7 @@ export const reportReducer = reducerSelector(report, {
 export const setLoading = (isLoading, dispatch) => dispatch({ type: ActionsTypes.LOADING, payload: isLoading });
 export const setFields = (fields, dispatch) => dispatch({ type: ActionsTypes.GET_FIELDS, payload: fields })
 export const setActivities = (activities, dispatch) => dispatch({ type: ActionsTypes.GET_ACTIVITIES, payload: activities })
+export const setAllActivities = (activities, dispatch) => dispatch({ type: ActionsTypes.SET_ALL_ACTIVITIES, payload: activities })
 
 export function getFields(dispatch) {
 	setLoading(true, dispatch);
@@ -63,11 +74,38 @@ export function getActivities(fieldId, dispatch) {
 	return axios.get(`/field/${fieldId}/activities`)
 		.then(({data}) => {
 			setActivities(data, dispatch)
+			return data
 		}).catch(err => {
 			console.log(err);
 		})
 		.finally(res => {
 			setLoading(false, dispatch);
 		})
+}
+
+export async function getActivitiesCompleted(list, fields, dispatch){
+	setLoading(true, dispatch);
+	let dto = [];
+	let completed = [];
+	for(const field of fields) {
+		await getActivities(field.id, dispatch).then(r => {
+			dto = [...dto, ...r]
+		})
+	}
+        list.forEach(fan => {
+            let activity = (dto || []).find(act => fan.activityId === act.id)
+            if(activity){
+                const sum = Number(fan.answer[0].quantity) + Number(fan.answer[1].quantity) + Number(fan.answer[2].quantity) + Number(fan.answer[3].quantity);
+                let dto = Number(sum/activity.peso);
+                let soma = Number((dto * activity.pontos).toFixed(2));
+				
+				completed.push({
+					atividade: activity.atividade,
+					points: soma
+				})
+            }
+        })
+		setAllActivities(completed, dispatch)
+	setLoading(false, dispatch);
 }
 

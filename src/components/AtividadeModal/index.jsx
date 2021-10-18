@@ -50,7 +50,7 @@ const AtividadeModal = ({open, handleClose, atividade, onSubmit}) => {
             let dto = (atividade || {}).answers
             let answer = (dto || {}).answer || [];
             let exist = answer.find(ans => ans.semester === m.period)
-            if(exist) m.cb(exist.points)
+            if(exist) m.cb(exist.quantity)
         })
     }, [atividade])
 
@@ -109,7 +109,7 @@ const AtividadeModal = ({open, handleClose, atividade, onSubmit}) => {
         // const dto = {...atividade, pontuacao: getTotal()}
         
         onSubmit(formDto).then(r => {
-            // onClose();
+            onClose();
         });
     }
 
@@ -215,20 +215,21 @@ const AtividadeModal = ({open, handleClose, atividade, onSubmit}) => {
                                     
                                     <div>
                                         <Input 
+                                            disabled
                                             accept="application/pdf,application/vnd.ms-excel" 
                                             id="comprovante-atividade" 
                                             type="file"
                                             style={{display: 'none'}}
                                         />
 
-                                        <Button variant="contained" component="span" size="small" color="primary">
+                                        <Button variant="contained" component="span" size="small" color="primary" disabled>
                                             Upload
                                         </Button>
                                     </div>
                                     
                                     
                                     <Typography color="textSecondary">
-                                        Anexar Documento
+                                        Anexar PDF
                                     </Typography>
                                     <CloudUpload/>
 

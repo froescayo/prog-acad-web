@@ -87,10 +87,10 @@ export function getFormulary(formId,dispatch) {
 	return axios.get(`/formulary/${formId}`)
 		.then(({data}) => {
 			setFormulary(data, dispatch);
-			console.log("[formulary]: ", data);
+			return data
 		})
 		.catch(err => {
-			console.log(err);
+			throw err;
 		})
 		.finally(res => {
 			setLoading(false, dispatch);
@@ -102,10 +102,10 @@ export function updateFormAnswer(form, dispatch) {
 	setLoading(true, dispatch);
 	return axios.put(`/formularyAnswer`, form)
 		.then(({data}) => {
-			console.log(data);
+			return data
 		})
 		.catch(err => {
-			console.log(err);
+			throw err;
 		})
 		.finally(res => {
 			setLoading(false, dispatch);
@@ -114,16 +114,17 @@ export function updateFormAnswer(form, dispatch) {
 }
 
 
-export function createFormulary(form, dispatch) {
+export async function createFormulary(form, dispatch) {
 	setLoading(true, dispatch);
-	return axios.post('/formulary', form)
+	return await axios.post('/formulary', form)
 		.then(({data}) => {
 			setFormulary(data, dispatch);
 			return data;
-			console.log("[data]", data);
+			
 		})
 		.catch(err => {
 			console.log(err);
+			throw err;
 		})
 		.finally(res => {
 			setLoading(false, dispatch);
@@ -139,6 +140,7 @@ export function closeFormulary(form, dispatch) {
 		})
 		.catch(err => {
 			console.log(err);
+			throw err;
 		})
 		.finally(res => {
 			setLoading(false, dispatch);

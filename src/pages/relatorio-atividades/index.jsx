@@ -14,6 +14,7 @@ import { getFields } from '../../store/reducers/report';
 import { GlobalStateContext } from '../../store';
 import { createFormulary, getFormulary } from '../../store/reducers/formulary';
 import { Snackbar, Alert } from '@mui/material';
+import VisualizarProgresso from '../visualizarProgresso';
 
 const MuiAlert = React.forwardRef(function Alert(props, ref) {
     return <Alert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -40,8 +41,8 @@ const RelatorioAtividades = () => {
     useEffect(() => {
 
         //Chama os campos
-        getFormulary(params.formularyId, dispatch);
-        getFields(dispatch);
+        getFormulary(params.formularyId, dispatch).catch(console.log);
+        getFields(dispatch).catch(console.log);
     }, [dispatch])
 
     const [open, setOpen] = React.useState(false);
@@ -54,6 +55,23 @@ const RelatorioAtividades = () => {
         setOpen(false);
     };
 
+    // const getPontuacao = () => {
+    //     // return fieldAnswers.reduce((soma, atv) => {
+    //     //     soma += Number(atv.points);
+    //     //     return soma;
+    //     // }, 0)
+    //     let soma = 0;
+    //     let fieldAnswers = (state.formulary.data || {}).dbFormularyAnswers || []
+    //     fieldAnswers.forEach(fan => {
+    //         let activity = (state.report.activities || []).find(act => fan.activityId === act.id)
+    //         if(activity){
+    //             const sum = Number(fan.answer[0].quantity) + Number(fan.answer[1].quantity) + Number(fan.answer[2].quantity) + Number(fan.answer[3].quantity);
+    //             let dto = Number(sum/activity.peso);
+    //             soma += Number((dto * activity.pontos).toFixed(2));
+    //         }
+    //     })
+    //     return soma;
+    // }
 
     const saveFormulary = () => {
         // let dto = state.formulary.data || {}
@@ -94,12 +112,7 @@ const RelatorioAtividades = () => {
 
                     <PaperContainer>
                         <div>
-                            {/* state.formulary.data.dbFormulary 
-                                .type 
-                                .comission
-                                .from
-                                .to
-                                 */}
+                            
                             <Typography variant="body1" color="textSecondary">
                                 Tipo de Solicitação: {((state.formulary.data || {}).dbFormulary || {}).type}
                             </Typography>
@@ -119,7 +132,9 @@ const RelatorioAtividades = () => {
                         </div>
                     </PaperContainer>
                     <div style={{display: 'flex', justifyContent: 'center', marginTop: '24px'}}>
-                        <Button variant="contained" color="primary" onClick={saveFormulary}>Gerar Relatório</Button>
+                        <Link to={`${match.url}/progresso`}>
+                            <Button variant="contained" color="primary" >Visualizar Progresso</Button>
+                        </Link>
                     </div>
                     
                     <Snackbar open={open} autoHideDuration={3500} onClose={handleClose} >
@@ -129,7 +144,10 @@ const RelatorioAtividades = () => {
                     </Snackbar>
                 </Container>
             </Route>
-            
+
+            <Route path={`${match.path}/progresso`}>
+                <VisualizarProgresso/>
+            </Route>
         </Switch>
     );
 }
