@@ -15,6 +15,7 @@ import { GlobalStateContext } from '../../store';
 import { createFormulary, getFormulary } from '../../store/reducers/formulary';
 import { Snackbar, Alert } from '@mui/material';
 import VisualizarProgresso from '../visualizarProgresso';
+import FieldsTable from '../../components/FieldsTable';
 
 const MuiAlert = React.forwardRef(function Alert(props, ref) {
     return <Alert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -110,27 +111,33 @@ const RelatorioAtividades = () => {
                         </div>
                     </div>
 
-                    <PaperContainer>
-                        <div>
-                            
-                            <Typography variant="body1" color="textSecondary">
-                                Tipo de Solicitação: {((state.formulary.data || {}).dbFormulary || {}).type}
-                            </Typography>
-                            <Typography variant="body1" color="textSecondary">
-                                Interstício: {`${new Date(((state.formulary.data || {}).dbFormulary || {}).from).toLocaleDateString()} a ${new Date(((state.formulary.data || {}).dbFormulary || {}).to).toLocaleDateString()}`}
-                            </Typography>
-                            <Typography variant="body1" color="textSecondary">
-                                Comissão:
-                            </Typography>
-                            
-                            <Comission list={comissao} />
+                    <div>
+                        <div style={{display:'flex', justifyContent: 'space-between', marginBottom: '20px'}}>
+                            <div>
+                                <Typography variant="body1" color="textSecondary">
+                                    Tipo de Solicitação: {((state.formulary.data || {}).dbFormulary || {}).type}
+                                </Typography>
+                                <Typography variant="body1" color="textSecondary">
+                                    Interstício: {`${new Date(((state.formulary.data || {}).dbFormulary || {}).from).toLocaleDateString()} a ${new Date(((state.formulary.data || {}).dbFormulary || {}).to).toLocaleDateString()}`}
+                                </Typography>
+                                
+                            </div>
 
+                            <div style={{display:'flex'}}>
+                                <Typography variant="body1" color="textSecondary">
+                                    Comissão:
+                                </Typography>
+                                <div style={{marginLeft: '8px'}}>
+                                {comissao.length ? <Comission list={comissao} /> : <Typography variant="body1" color="textSecondary">&nbsp;N/A</Typography>}
+                                </div>
+                            </div>
                         </div>
 
-                        <div style={{maxHeight: '450px', overflowY: 'auto', padding: '0 8px', boxShadow: '0px -2px 2px rgba(0,0,0,.1) inset'}}>
+                        <FieldsTable list={(state.report.fields || [])}/>
+                        {/* <div style={{maxHeight: '450px', overflowY: 'auto', padding: '0 8px', boxShadow: '0px -2px 2px rgba(0,0,0,.1) inset'}}>
                             {  (state.report.fields || []).map(el => <AreaItem campo={el} key={el.id}/>) }
-                        </div>
-                    </PaperContainer>
+                        </div> */}
+                    </div>
                     <div style={{display: 'flex', justifyContent: 'center', marginTop: '24px'}}>
                         <Link to={`${match.url}/progresso`}>
                             <Button variant="contained" color="primary" >Visualizar Progresso</Button>

@@ -25,6 +25,7 @@ const AtividadeModal = ({open, handleClose, atividade, onSubmit}) => {
     const [semestre2, setSemestre2] = useState(0);
     const [semestre3, setSemestre3] = useState(0);
     const [semestre4, setSemestre4] = useState(0);
+    const [arquivoPDF, setArquivoPDF] = useState({});
 
     let { from = '2021-10-4', to = '2022-10-4' } = (state.formulary.data || {}).dbFormulary || {};
 
@@ -38,17 +39,22 @@ const AtividadeModal = ({open, handleClose, atividade, onSubmit}) => {
 
     useEffect(() => {
         let { from = '2021-10-4', to = '2022-10-4' } = (state.formulary.data || {}).dbFormulary || {};
+        let dto = ((atividade || {}).answers || {})
         
+        if(dto.filename) {
+            setArquivoPDF({filename: dto.filename, content: dto.content})
+        }
+        
+        let answer = (dto || {}).answer || [];
+
         let models = [
             {period: `${(new Date(from)).getFullYear()}.1`, cb: setSemestre1},
             {period: `${(new Date(from)).getFullYear()}.2`, cb: setSemestre2},
             {period: `${(new Date(to)).getFullYear()}.1`, cb: setSemestre3},
             {period: `${(new Date(to)).getFullYear()}.2`, cb: setSemestre4},
         ]
+
         models.forEach(m => {
-            console.log(m);
-            let dto = (atividade || {}).answers
-            let answer = (dto || {}).answer || [];
             let exist = answer.find(ans => ans.semester === m.period)
             if(exist) m.cb(exist.quantity)
         })
@@ -76,17 +82,34 @@ const AtividadeModal = ({open, handleClose, atividade, onSubmit}) => {
         setSemestre2(0);
         setSemestre3(0);
         setSemestre4(0);
+        setArquivoPDF({})
         handleClose()
     }
 
+    const handleFileUpload = async (event) => {
+        let filename = event.target.files[0].name;
+        let result = await toBase64(event.target.files[0]);
+        setArquivoPDF({filename, content: result})
+    }
+
+    const toBase64 = fileObj => new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(fileObj);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = error => reject(error);
+    });
+
     const handleSubmit = () => {
         
+
         let answers = (atividade || {}).answers || {}
+
         const formDto = {
             id: answers.id || null,
             formularyId: null,
             fieldId: null,
             activityId: atividade.id,
+            file: arquivoPDF,
             answers: [
                 {
                     semester: intersticio.period1,
@@ -215,21 +238,23 @@ const AtividadeModal = ({open, handleClose, atividade, onSubmit}) => {
                                     
                                     <div>
                                         <Input 
-                                            disabled
+                                            
                                             accept="application/pdf,application/vnd.ms-excel" 
                                             id="comprovante-atividade" 
                                             type="file"
+                                            placeholder="Anexar PDF"
+                                            onChange={handleFileUpload}
                                             style={{display: 'none'}}
                                         />
 
-                                        <Button variant="contained" component="span" size="small" color="primary" disabled>
+                                        <Button variant="contained" component="span" size="small" color="primary">
                                             Upload
                                         </Button>
                                     </div>
                                     
                                     
                                     <Typography color="textSecondary">
-                                        Anexar PDF
+                                        {arquivoPDF.filename || 'Anexar PDF'}
                                     </Typography>
                                     <CloudUpload/>
 

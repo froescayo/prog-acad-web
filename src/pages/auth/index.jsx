@@ -58,7 +58,6 @@ function Auth() {
     }
 
     const handleSignupSubmit = async (form) => {
-        console.log(form);
         try {
             await signUp(form, dispatch)
             setSuccess(true)

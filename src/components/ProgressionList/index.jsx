@@ -36,8 +36,8 @@ export default function ProgressionList() {
             </Link>
         </div>
 
-        <PaperContainer>
-                <Typography variant="h6">Lista de Solicitações</Typography>
+        <div>
+                <Typography variant="h6" style={{marginBottom: "20px"}}>Lista de Solicitações</Typography>
                 { state.formulary.list.length ? 
                     <FormulariesTable list={state.formulary.list}/>
                  : 
@@ -47,7 +47,7 @@ export default function ProgressionList() {
                     </div>
                 </div>
                 }
-        </PaperContainer>
+        </div>
 
         </Container>
     )

@@ -73,7 +73,6 @@ const NovaProgressao = () => {
 	};
 
 	const handleStartDateChange = (event) => {
-		console.log(event.target.value)
 		let x = moment(event.target.value, "yyyy-MM-DD");
 		x.add(2, "y");
 		if(x.isValid()){
@@ -136,8 +135,7 @@ const NovaProgressao = () => {
 		}
 
 		//post formulary
-		// setFormulary(dto, dispatch);
-		// console.log(state);
+		
 		try {
 			const data = await createFormulary(dto, dispatch)
 			setSuccess(true);
@@ -147,7 +145,6 @@ const NovaProgressao = () => {
 			setOpen(true);
 		}
 		
-		// createFormulary
 	}
 
 	return (

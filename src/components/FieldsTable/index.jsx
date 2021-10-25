@@ -7,7 +7,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Link, useHistory } from "react-router-dom";
+import { useHistory, useRouteMatch } from "react-router-dom";
+import { ArrowForward } from '@material-ui/icons';
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -31,12 +32,13 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-export default function FormulariesTable({list}) {
+export default function FieldsTable({list}) {
 
   const history = useHistory();
+  const match = useRouteMatch();
 
-  const handleClick = (solicitacaoId) => {
-    history.push(`/relatorio-de-atividades/${solicitacaoId}`)
+  const handleClick = (campo) => {
+    history.push(`${match.url}/campo/${campo}`)
   }
 
   return (
@@ -44,24 +46,29 @@ export default function FormulariesTable({list}) {
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell align="left" >Tipo</StyledTableCell>
-            <StyledTableCell align="left" >Status</StyledTableCell>
-            <StyledTableCell align="left" >Data&nbsp;de&nbsp;Criação</StyledTableCell>
-            <StyledTableCell align="left" >Início Interstício</StyledTableCell>
+            <StyledTableCell align="left" >CAMPO</StyledTableCell>
+            {/* <StyledTableCell align="left" >REALIZADAS</StyledTableCell> */}
+            <StyledTableCell align="left" >&nbsp;</StyledTableCell>
           </TableRow>
         </TableHead>
-        <TableBody>
+        {/* <div style={{maxHeight: '420px', overflowY: 'auto', minWidth: '100%', display: 'block', flex: 1}}> */}
+        <TableBody >
+            
           {list.map((row) => (
             
-              <StyledTableRow key={row.id} onClick={() => handleClick(row.id)}>
-                <StyledTableCell align="left">{row.type}</StyledTableCell>
-                <StyledTableCell align="left">{row.status}</StyledTableCell>
-                <StyledTableCell align="left">{new Date(row.createdAt).toLocaleDateString()}</StyledTableCell>
-                <StyledTableCell align="left">{new Date(row.from).toLocaleDateString()}</StyledTableCell>
+              <StyledTableRow key={row.id} onClick={() => handleClick(row.id)} style={{flex: 1, width: '100%'}}>
+                <StyledTableCell align="left">{row.campo}</StyledTableCell>
+                {/* <StyledTableCell align="center">{0}</StyledTableCell> */}
+                <StyledTableCell align="center"><ArrowForward/></StyledTableCell>
+
+                {/* <StyledTableCell align="left">{new Date(row.createdAt).toLocaleDateString()}</StyledTableCell>
+                <StyledTableCell align="left">{new Date(row.from).toLocaleDateString()}</StyledTableCell> */}
               </StyledTableRow>
             
           ))}
         </TableBody>
+        
+        {/* </div> */}
       </Table>
     </TableContainer>
   );

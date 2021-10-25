@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { styled } from '@mui/material/styles';
+import { styled } from '@material-ui/core';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
@@ -12,7 +12,7 @@ import { Link, useHistory } from "react-router-dom";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
+    backgroundColor: theme.palette.primary.main,
     color: theme.palette.common.white,
   },
   [`&.${tableCellClasses.body}`]: {
@@ -21,7 +21,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 }));
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  '&:nth-of-type(odd)': {
+  '&:hover': {
     backgroundColor: theme.palette.action.hover,
   },
   // hide last border
@@ -38,18 +38,16 @@ export default function ProgressTable({list}) {
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell>Atividade</StyledTableCell>
-            <StyledTableCell align="right">Pontuação</StyledTableCell>
+            <StyledTableCell align="left">Atividade</StyledTableCell>
+            <StyledTableCell align="left">Pontuação</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {list.map((row) => (
             
               <StyledTableRow key={row.id} >
-                <StyledTableCell component="th" scope="row">
-                  {row.atividade}
-                </StyledTableCell>
-                <StyledTableCell align="right">{row.points}</StyledTableCell>
+                <StyledTableCell align="left">{row.atividade}</StyledTableCell>
+                <StyledTableCell align="center">{row.points}</StyledTableCell>
               </StyledTableRow>
             
           ))}

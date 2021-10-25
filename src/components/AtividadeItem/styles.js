@@ -24,12 +24,13 @@ const styles = makeStyles((theme) => ({
         padding: '8px',
         marginTop: '8px',
         borderRadius: '4px',
-        border: '1px solid #2a9d8f',
+        border: '2px solid #2a9d8f',
         cursor: 'pointer',
         '&:hover': {
-            border: `1px solid #324b4e`,
+            // border: `2px solid #324b4e`,
+            background: 'rgba(0,0,0,.05)'
         },
-        boxShadow: 'rgba(13, 100, 59, 0.288) 0px 4px 8px -2px, rgba(30, 87, 13, 0.171) 0px 0px 0px 1px'
+        // boxShadow: 'rgba(13, 100, 59, 0.288) 0px 4px 8px -2px, rgba(30, 87, 13, 0.171) 0px 0px 0px 1px'
     },
     atividadeWrapper: {
         display: 'flex',
@@ -40,6 +41,7 @@ const styles = makeStyles((theme) => ({
         cursor: 'pointer',
         '&:hover': {
             border: `1px solid #324b4e`,
+            background: 'rgba(0,0,0,.05)'
         },
         boxShadow: 'rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px'
     }
