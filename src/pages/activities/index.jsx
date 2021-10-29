@@ -136,9 +136,7 @@ const Activities = () => {
             <PaperContainer>
                 <div style={{padding: '0 8px 8px 8px'}}>
                     <Typography>{campo.observacao}</Typography>
-                    <Typography variant="subtitle2" color="textSecondary">
-                        {}
-                    </Typography>
+                    
                 </div>
                 <div style={{maxHeight: '400px', overflowY: 'auto'}}>
                     <div style={{padding: '0 8px'}}>
@@ -146,15 +144,18 @@ const Activities = () => {
 
                     </div>
                 </div>
+                <div style={{display: 'flex', justifyContent: "space-between", alignItems: 'center'}}>
+                    <div style={{marginTop: '12px', padding: '0 8px'}}>
+                        <Typography>Pontuação Total: <Typography variant="h3" color="primary">{getPontuacao()}</Typography></Typography>
+                    </div>
 
-                <div style={{marginTop: '12px', padding: '0 8px'}}>
-                    <Typography>Pontuação Total: {getPontuacao()}</Typography>
+                    <div >
+                        <Button variant="contained" color="primary" onClick={goBack}>Confirmar</Button>
+                    </div>
                 </div>
             </PaperContainer>
 
-            <div style={{padding: '8px 0', display: 'flex', justifyContent:"center"}}>
-                    <Button variant="contained" color="primary" onClick={goBack}>Confirmar</Button>
-            </div>
+            
 
             <AtividadeModal open={openModal} handleClose={handleClose} atividade={atividadeSelected} onSubmit={handleAtividadesRealizadas}/>
             <Snackbar open={open} autoHideDuration={3500} onClose={handleCloseSnack}>

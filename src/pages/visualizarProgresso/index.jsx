@@ -76,32 +76,42 @@ const VisualizarProgresso = () => {
 				</div>
 			</div>
 
-			<PaperContainer>
-				<div style={{display: 'flex'}}>
-					<div>
-																
-							<Typography variant="body1" color="textSecondary">
-									Tipo de Solicitação: {((state.formulary.data || {}).dbFormulary || {}).type}
-							</Typography>
-							<Typography variant="body1" color="textSecondary">
-									Interstício: {`${new Date(((state.formulary.data || {}).dbFormulary || {}).from).toLocaleDateString()} a ${new Date(((state.formulary.data || {}).dbFormulary || {}).to).toLocaleDateString()}`}
-							</Typography>
-							<Typography variant="body1" color="textSecondary">
-									Comissão:
-							</Typography>
+			<div>
+				<div style={{display: 'flex', alignItems: 'center', padding: '10px 0 8px 0'}}>
+					<div style={{display: 'flex'}}>
+							<div>
+								<Typography variant="body1" color="textSecondary">
+										Tipo de Solicitação: {((state.formulary.data || {}).dbFormulary || {}).type}
+								</Typography>
+								<Typography variant="body1" color="textSecondary">
+										Interstício: {`${new Date(((state.formulary.data || {}).dbFormulary || {}).from).toLocaleDateString()} a ${new Date(((state.formulary.data || {}).dbFormulary || {}).to).toLocaleDateString()}`}
+								</Typography>	
+							</div>				
+							<div style={{marginLeft: '20px'}}>
+								<div style={{display:'flex'}}>
+									<Typography variant="body1" color="textSecondary">
+										Comissão:
+									</Typography>
+									<div style={{marginLeft: '8px'}}>
+									{comissao.length ? <Comission list={comissao} /> : <Typography variant="body1" color="textSecondary">&nbsp;N/A</Typography>}
+									</div>
+								</div>
+							</div>				
 							
-							<Comission list={comissao} />
+							
 
 					</div>
 
-					<div style={{marginTop: '12px', padding: '0 8px', marginLeft: 'auto'}}>
-							<Typography>Pontuação Total: {getTotal()}</Typography>
+					<div style={{marginTop: '0px', marginLeft: 'auto'}}>
+							<Typography color="textSecondary">Pontuação Total <Typography variant="h3" color="primary" style={{textAlign: 'right'}}>{getTotal()}</Typography></Typography>
 					</div>
 				</div>
+				<div style={{maxHeight: 450}}>
+					<ProgressTable list={state.report.allActivities}/>
 
-				<ProgressTable list={state.report.allActivities}/>
+				</div>
 				
-			</PaperContainer>
+			</div>
 			<div style={{ display: 'flex', justifyContent: 'center', marginTop: '24px' }}>
 				<Button variant="contained" color="primary" disabled>Gerar Relatório</Button>
 			</div>

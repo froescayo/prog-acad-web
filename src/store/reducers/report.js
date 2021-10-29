@@ -85,27 +85,35 @@ export function getActivities(fieldId, dispatch) {
 
 export async function getActivitiesCompleted(list, fields, dispatch){
 	setLoading(true, dispatch);
-	let dto = [];
-	let completed = [];
-	for(const field of fields) {
-		await getActivities(field.id, dispatch).then(r => {
-			dto = [...dto, ...r]
+	
+	
+	await axios.all(fields.map(field => axios.get(`/field/${field.id}/activities`)))
+		.then(results => {
+			let dto = [];
+			let completed = [];
+
+			results.forEach(r => {
+				r.data.forEach( el => dto.push(el))
+			})
+			list.forEach(fan => {
+				let activity = (dto || []).find(act => fan.activityId === act.id)
+				if(activity){
+					const sum = Number(fan.answer[0].quantity) + Number(fan.answer[1].quantity) + Number(fan.answer[2].quantity) + Number(fan.answer[3].quantity);
+					let dto = Number(sum/activity.peso);
+					let soma = Number((dto * activity.pontos).toFixed(2));
+					
+					completed.push({
+						atividade: activity.atividade,
+						points: soma
+					})
+				}
+			})
+			setAllActivities(completed, dispatch)
 		})
-	}
-        list.forEach(fan => {
-            let activity = (dto || []).find(act => fan.activityId === act.id)
-            if(activity){
-                const sum = Number(fan.answer[0].quantity) + Number(fan.answer[1].quantity) + Number(fan.answer[2].quantity) + Number(fan.answer[3].quantity);
-                let dto = Number(sum/activity.peso);
-                let soma = Number((dto * activity.pontos).toFixed(2));
-				
-				completed.push({
-					atividade: activity.atividade,
-					points: soma
-				})
-            }
-        })
-		setAllActivities(completed, dispatch)
-	setLoading(false, dispatch);
+		.finally(r => {
+			setLoading(false, dispatch);
+
+		})
+        
 }
 

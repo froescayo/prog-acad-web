@@ -210,7 +210,7 @@ const AtividadeModal = ({open, handleClose, atividade, onSubmit}) => {
                         
                             <div style={{flex: 1}}>
                                 <div style={{margin: '0 auto', width: 'max-content'}}>
-                                    <Typography color="textSecondary" variant="body2">Referencia</Typography>
+                                    <Typography color="textSecondary" variant="body2">Referência</Typography>
                                     <div style={{marginTop: 8, textAlign: 'center'}}>
                                         <small>{atividade.label}</small>
                                     </div>
@@ -224,15 +224,16 @@ const AtividadeModal = ({open, handleClose, atividade, onSubmit}) => {
 
                                 <Typography color="textSecondary" variant="body2">Comprovante de atividades</Typography>
                                 
+                                <div style={{display: 'flex', alignItems: 'center', marginTop: 8}}>
                                 <label 
                                     htmlFor="comprovante-atividade" 
                                     style={{
-                                        background: '#c4cccb', 
-                                        padding: 10, 
+                                        // background: '#c4cccb', 
+                                        // padding: 10, 
                                         borderRadius: 4, 
                                         display: 'inline-block', 
                                         textAlign: 'center',
-                                        marginTop: 8
+                                        // marginTop: 8
                                     }}>
                                     <div style={{display: 'flex', gap: 10, alignItems: 'center'}}>
                                     
@@ -248,25 +249,37 @@ const AtividadeModal = ({open, handleClose, atividade, onSubmit}) => {
                                         />
 
                                         <Button variant="contained" component="span" size="small" color="primary">
-                                            Upload
+                                            Anexar PDF
+                                            <CloudUpload style={{marginLeft: "10px"}}/>
                                         </Button>
                                     </div>
                                     
                                     
-                                    <Typography color="textSecondary">
-                                        {arquivoPDF.filename || 'Anexar PDF'}
-                                    </Typography>
-                                    <CloudUpload/>
+                                    
+                                    
 
                                     </div>
+
+                                    
                                     
                                 </label>
-                            </div>
 
+                                <div style={{marginLeft: '20px'}}>
+                                    {arquivoPDF.content && <a download={arquivoPDF.filename || "comprovante.pdf"} href={arquivoPDF.content} title='Fazer download'>
+                                        <Typography color="textSecondary">
+                                            {arquivoPDF.filename}
+                                        </Typography>
+                                    </a>}
+                                </div>
+                                </div>
+
+                                
+                            </div>
+                                    
                             <div>
                                 <Typography color="textSecondary" variant="body2">Total de pontos</Typography>
-                                <div style={{marginTop: 8, textAlign: 'center'}}>
-                                    <small>{getTotal()}</small>
+                                <div style={{textAlign: 'center'}}>
+                                    <Typography variant="h4" color="primary">{getTotal()}</Typography>
                                 </div>
                             </div>
 
