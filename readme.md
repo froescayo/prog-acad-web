@@ -12,7 +12,7 @@ Repositório contendo o projeto desenvolvido para a disciplina de TÓPICOS EM SI
 - [Lucas Ferreira](https://github.com/KasFerreira) (Implantação)
 - [Andrei Macedo](https://github.com/asmcdo) (Back-End e Testes)
 - [Breno Barreto de Souza Santos](https://github.com/brenobss) (Front-End)
-- [Emanuel Vieira](https://github.com/emanuelvs) (Design)
+- [Emanuel Vieira](https://github.com/emanuelvs) (Front-End e Design)
 - [Cayo Froes](https://github.com/froescayo) (Back-End e BD)
 - [Arlete Reis](https://github.com/arllette) (Requisitos e Documentação)
 
@@ -99,6 +99,7 @@ Link: https://whimsical.com/arquitetura-da-aplicacao-72ThrruL54ybvGVZX3mMfc
   3) Em seguida digite > npm install
 
   4) Por fim > npm start
+
 - ## Como Rodar o back-end
   - Acessar [How To](https://github.com/froescayo/prog-acad-api)
 # Documento de Implantação
