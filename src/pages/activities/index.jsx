@@ -43,7 +43,7 @@ const Activities = () => {
         getActivities(params.campoId, dispatch).catch(console.log);
     }, [dispatch]);
 
-    // const [atividadesRealizadas, setAtividadesRealizadas] = useState([]);
+    
 
     let fieldAnswers = (state.formulary.data || {}).dbFormularyAnswers || [].filter(ans => ans.fieldId === params.campoId)
 
@@ -76,10 +76,7 @@ const Activities = () => {
     };
 
     const getPontuacao = () => {
-        // return fieldAnswers.reduce((soma, atv) => {
-        //     soma += Number(atv.points);
-        //     return soma;
-        // }, 0)
+    
         let soma = 0;
         fieldAnswers.forEach(fan => {
             let activity = (state.report.activities || []).find(act => fan.activityId === act.id)

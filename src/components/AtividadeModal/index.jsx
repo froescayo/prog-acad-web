@@ -129,7 +129,6 @@ const AtividadeModal = ({open, handleClose, atividade, onSubmit}) => {
                 },
                 ]
             }
-        // const dto = {...atividade, pontuacao: getTotal()}
         
         onSubmit(formDto).then(r => {
             onClose();
@@ -228,12 +227,9 @@ const AtividadeModal = ({open, handleClose, atividade, onSubmit}) => {
                                 <label 
                                     htmlFor="comprovante-atividade" 
                                     style={{
-                                        // background: '#c4cccb', 
-                                        // padding: 10, 
                                         borderRadius: 4, 
                                         display: 'inline-block', 
                                         textAlign: 'center',
-                                        // marginTop: 8
                                     }}>
                                     <div style={{display: 'flex', gap: 10, alignItems: 'center'}}>
                                     

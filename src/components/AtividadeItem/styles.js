@@ -7,7 +7,6 @@ const styles = makeStyles((theme) => ({
         padding: '8px',
         borderRadius: '4px',
         border: '2px solid #c4cccb',
-        // background: 'hsla(217, 100%, 50%, 1)',
         background: '#c4cccb',
         marginTop: '8px',
         '&:hover': {
@@ -27,10 +26,8 @@ const styles = makeStyles((theme) => ({
         border: '2px solid #2a9d8f',
         cursor: 'pointer',
         '&:hover': {
-            // border: `2px solid #324b4e`,
             background: 'rgba(0,0,0,.05)'
         },
-        // boxShadow: 'rgba(13, 100, 59, 0.288) 0px 4px 8px -2px, rgba(30, 87, 13, 0.171) 0px 0px 0px 1px'
     },
     atividadeWrapper: {
         display: 'flex',

@@ -56,30 +56,6 @@ const RelatorioAtividades = () => {
         setOpen(false);
     };
 
-    // const getPontuacao = () => {
-    //     // return fieldAnswers.reduce((soma, atv) => {
-    //     //     soma += Number(atv.points);
-    //     //     return soma;
-    //     // }, 0)
-    //     let soma = 0;
-    //     let fieldAnswers = (state.formulary.data || {}).dbFormularyAnswers || []
-    //     fieldAnswers.forEach(fan => {
-    //         let activity = (state.report.activities || []).find(act => fan.activityId === act.id)
-    //         if(activity){
-    //             const sum = Number(fan.answer[0].quantity) + Number(fan.answer[1].quantity) + Number(fan.answer[2].quantity) + Number(fan.answer[3].quantity);
-    //             let dto = Number(sum/activity.peso);
-    //             soma += Number((dto * activity.pontos).toFixed(2));
-    //         }
-    //     })
-    //     return soma;
-    // }
-
-    const saveFormulary = () => {
-        // let dto = state.formulary.data || {}
-        // createFormulary(dto, dispatch).then(r => {
-        //     setOpen(true);
-        // })
-    }
 
     let comissao = ((state.formulary.data || {}).dbFormulary || {}).comission || []
 

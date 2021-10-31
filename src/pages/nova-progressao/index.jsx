@@ -134,7 +134,6 @@ const NovaProgressao = () => {
 			})
 		}
 
-		//post formulary
 		
 		try {
 			const data = await createFormulary(dto, dispatch)

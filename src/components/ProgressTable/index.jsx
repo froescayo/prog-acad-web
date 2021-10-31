@@ -24,7 +24,6 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   '&:hover': {
     backgroundColor: theme.palette.action.hover,
   },
-  // hide last border
   '&:last-child td, &:last-child th': {
     border: 0,
   },
@@ -39,7 +38,7 @@ export default function ProgressTable({list}) {
         <TableHead>
           <TableRow>
             <StyledTableCell align="left">Atividade</StyledTableCell>
-            <StyledTableCell align="left">Pontuação</StyledTableCell>
+            <StyledTableCell align="center">Pontuação</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>

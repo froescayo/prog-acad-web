@@ -7,7 +7,6 @@ const styles = makeStyles((theme) => ({
         padding: '8px',
         borderRadius: '4px',
         border: '2px solid #c4cccb',
-        // background: 'hsla(217, 100%, 50%, 1)',
         background: '#c4cccb',
         marginTop: '8px',
         '&:hover': {

@@ -21,7 +21,6 @@ import './style.css';
 export default function UserForm({ handleSubmit }) {
 
 	const [state, dispatch] = useContext(GlobalStateContext);
-	// const [selectedDate, setSelectedDate] = React.useState(new Date());
 
 	useEffect(() => {
 		async function fetchCommonData() {
@@ -33,10 +32,6 @@ export default function UserForm({ handleSubmit }) {
 		}
 		fetchCommonData();
 	}, [dispatch])
-
-	// const handleDateChange = (date) => {
-	// 	setSelectedDate(date);
-	// };
 
 	const [academicDegreeId, setAcademicDegreeId] = useState('');
 	const [careerId, setCareerId] = useState('');
