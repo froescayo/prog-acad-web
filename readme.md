@@ -9,9 +9,9 @@ Repositório contendo o projeto desenvolvido para a disciplina de TÓPICOS EM SI
 </p>
 
 -   [Iury Gomes de Oliveira](https://github.com/iurygdeoliveira) (Gestão)
--   [Lucas Ferreira](https://github.com/KasFerreira) (Implantação)
+-   [Antonio Vicente](https://github.com/vicenteu) (Documentação)
 -   [Andrei Macedo](https://github.com/asmcdo) (Back-End e Testes)
--   [Breno Barreto de Souza Santos](https://github.com/brenobss) (Front-End)
+-   [Breno Barreto de Souza Santos](https://github.com/brenobss) (Documentação)
 -   [Emanuel Vieira](https://github.com/emanuelvs) (Front-End e Design)
 -   [Cayo Froes](https://github.com/froescayo) (Back-End e BD)
 -   [Arlete Reis](https://github.com/arllette) (Requisitos e Documentação)
